@@ -23,10 +23,16 @@ var spiderImageY;
 var arrowImage;
 var arrowWidth;
 var arrowHeight;
-
 //the current position of the arrow
 var arrowX;
 var arrowY;
+
+// The image of a spiderweb
+var spiderwebImage;
+// The current position of the butterfly face
+var spiderwebImageX;
+var spiderwebImageY;
+
 
 // The transparent image of "felt" that wipes down the canvas
 var feltTextureImage;
@@ -44,6 +50,7 @@ function preload() {
   butterflyImage = loadImage("assets/images/golden_butterfly.png");
   feltTextureImage = loadImage("assets/images/black-felt-texture.png");
   arrowImage = loadImage("assets/images/arrow.png");
+  spiderwebImage = loadImage("assets/images/spiderweb.png");
 }
 
 
@@ -62,6 +69,10 @@ function setup() {
   // Start the spider image at the centre of the canvas
   spiderImageX = width/2;
   spiderImageY = height/2;
+
+  // Start the spiderweb image at the centre of the canvas
+  spiderwebImageX = width/2;
+  spiderwebImageY = height/2;
 
   //setting arrow width and Height
   arrowWidth = 150;
@@ -101,9 +112,15 @@ function draw() {
   // Calculate the distance in X and in Y
   var xDistance = mouseX - butterflyImageX;
   var yDistance = mouseY - butterflyImageY;
+  var xDistance2 = mouseX - spiderwebImageX;
+  var yDistance2 = mouseY - spiderwebImageY;
+
   // Add 1/10th of the x and y distance to the butterfly's current (x,y) location
   butterflyImageX = butterflyImageX + xDistance/10;
   butterflyImageY = butterflyImageY + yDistance/10;
+  //add a quarter of the x and y distance to the spiderweb's current location
+  spiderwebImagex = spiderwebImageX + xDistance2/4;
+  spiderwebImageY = spiderwebImageY + yDistance2/4;
 
   //spider stays on the mouse location
   spiderImageX = mouseX;
@@ -115,4 +132,7 @@ function draw() {
 
   //Display the spider image
   image(spiderImage,spiderImageX,spiderImageY);
+
+  //Display the spiderweb image
+  image(spiderwebImage,spiderwebImagex,spiderwebImageY);
 }
