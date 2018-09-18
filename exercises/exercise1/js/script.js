@@ -7,20 +7,26 @@
 // One moves toward the mouse cursor.
 
 
-// The image of a butterfly face
+// The image of a butterfly
 var butterflyImage;
 // The current position of the butterfly face
 var butterflyImageX;
 var butterflyImageY;
 
+// The image of a spider
+var spiderImage;
+// The current position of the butterfly face
+var spiderImageX;
+var spiderImageY;
+
 //The image of the arrow
-var arrowImage
-var arrowWidth
-var arrowHeight
+var arrowImage;
+var arrowWidth;
+var arrowHeight;
 
 //the current position of the arrow
-var arrowX
-var arrowY
+var arrowX;
+var arrowY;
 
 // The transparent image of "felt" that wipes down the canvas
 var feltTextureImage;
@@ -34,9 +40,10 @@ var feltTextureImageY;
 // Load the two images we're using before the program starts
 
 function preload() {
+  spiderImage = loadImage("assets/images/red_spider.png");
   butterflyImage = loadImage("assets/images/golden_butterfly.png");
   feltTextureImage = loadImage("assets/images/black-felt-texture.png");
-  arrowImage = loadImage("assets/images/arrow.png")
+  arrowImage = loadImage("assets/images/arrow.png");
 }
 
 
@@ -51,6 +58,10 @@ function setup() {
   // Start the butterfly image at the centre of the canvas
   butterflyImageX = width/2;
   butterflyImageY = height/2;
+
+  // Start the spider image at the centre of the canvas
+  spiderImageX = width/2;
+  spiderImageY = height/2;
 
   //setting arrow width and Height
   arrowWidth = 150;
@@ -94,6 +105,14 @@ function draw() {
   butterflyImageX = butterflyImageX + xDistance/10;
   butterflyImageY = butterflyImageY + yDistance/10;
 
+  //spider stays on the mouse location
+  spiderImageX = mouseX;
+  spiderImageY = mouseY;
+
+
   // Display the butterfly image
   image(butterflyImage,butterflyImageX,butterflyImageY);
+
+  //Display the spider image
+  image(spiderImage,spiderImageX,spiderImageY);
 }
