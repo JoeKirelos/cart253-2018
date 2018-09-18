@@ -1,78 +1,155 @@
-// Exercise 1 - Moving pictures
-// Pippin Barr
-//
-// Starter code for exercise 1.
-// It moves two pictures around on the canvas.
-// One moves linearly down the screen.
-// One moves toward the mouse cursor.
+/*********************************************************
 
+Exercise 2 - The Artful Dodger
+Pippin Barr
 
-// The image of a clown face
-var clownImage;
-// The current position of the clown face
-var clownImageX;
-var clownImageY;
+Starter code for exercise 2.
 
-// The transparent image of "felt" that wipes down the canvas
-var feltTextureImage;
-// The current position of the transparent image of "felt"
-var feltTextureImageX;
-var feltTextureImageY;
+*********************************************************/
 
+// The position and size of our avatar circle
+var avatarX;
+var avatarY;
+var avatarSize = 50;
 
-// preload()
-//
-// Load the two images we're using before the program starts
+// The speed and velocity of our avatar circle
+var avatarSpeed = 10;
+var avatarVX = 0;
+var avatarVY = 0;
 
-function preload() {
-  clownImage = loadImage("assets/images/clown.png");
-  feltTextureImage = loadImage("assets/images/black-felt-texture.png");
-}
+// The position and size of the enemy circle
+var enemyX;
+var enemyY;
+var enemySize = 50;
+// How much bigger the enemy circle gets with each successful dodge
+var enemySizeIncrease = 5;
 
+// The speed and velocity of our enemy circle
+var enemySpeed = 5;
+var enemyVX = 5;
+// How much bigger the enemy circle gets with each successful dodge
+var enemySpeedIncrease = 0.5;
+
+// How many dodges the player has made
+var dodges = 0;
 
 // setup()
 //
-// Set up the canvas, position the images, set the image mode.
-
+// Make the canvas, position the avatar and anemy
 function setup() {
-  // Create our canvas
-  createCanvas(640,640);
+  // Create our playing area
+  createCanvas(500,500);
 
-  // Start the clown image at the centre of the canvas
-  clownImageX = width/2;
-  clownImageY = height/2;
+  // Put the avatar in the centre
+  avatarX = width/2;
+  avatarY = height/2;
 
-  // Start the felt image perfectly off screen above the canvas
-  feltTextureImageX = width/2;
-  feltTextureImageY = 0 - feltTextureImage.height/2;
+  // Put the enemy to the left at a random y coordinate within the canvas
+  enemyX = 0;
+  enemyY = random(0,height);
 
-  // We'll use imageMode CENTER for this script
-  imageMode(CENTER);
+  // No stroke so it looks cleaner
+  noStroke();
 }
-
 
 // draw()
 //
-// Moves the felt image linearly
-// Moves the clown face toward the current mouse location
-
+// Handle moving the avatar and enemy and checking for dodges and
+// game over situations.
 function draw() {
+  // A pink background
+  background(255,220,220);
 
-  // Move the felt image down by increasing its y position
-  feltTextureImageY += 1;
+  // Default the avatar's velocity to 0 in case no key is pressed this frame
+  avatarVX = 0;
+  avatarVY = 0;
 
-  // Display the felt image
-  image(feltTextureImage,feltTextureImageX,feltTextureImageY);
+  // Check which keys are down and set the avatar's velocity based on its
+  // speed appropriately
 
-  // Move the clown by moving it 1/10th of its current distance from the mouse
+  // Left and right
+  if (keyIsDown(LEFT_ARROW)) {
+    avatarVX = -avatarSpeed;
+  }
+  else if (keyIsDown(RIGHT_ARROW)) {
+    avatarVX = avatarSpeed;
+  }
 
-  // Calculate the distance in X and in Y
-  var xDistance = mouseX - clownImageX;
-  var yDistance = mouseY - clownImageY;
-  // Add 1/10th of the x and y distance to the clown's current (x,y) location
-  clownImageX = clownImageX + xDistance/10;
-  clownImageY = clownImageY + yDistance/10;
+  // Up and down (separate if-statements so you can move vertically and
+  // horizontally at the same time)
+  if (keyIsDown(UP_ARROW)) {
+    avatarVY = -avatarSpeed;
+  }
+  else if (keyIsDown(DOWN_ARROW)) {
+    avatarVY = avatarSpeed;
+  }
 
-  // Display the clown image
-  image(clownImage,clownImageX,clownImageY);
+  // Move the avatar according to its calculated velocity
+  avatarX = avatarX + avatarVX;
+  avatarY = avatarY + avatarVY;
+
+  // The enemy always moves at enemySpeed (which increases)
+  enemyVX = enemySpeed;
+  // Update the enemy's position based on its velocity
+  enemyX = enemyX + enemyVX;
+
+  // Check if the enemy and avatar overlap - if they do the player loses
+  // We do this by checking if the distance between the centre of the enemy
+  // and the centre of the avatar is less that their combined radii
+  if (dist(enemyX,enemyY,avatarX,avatarY) < enemySize/2 + avatarSize/2) {
+    // Tell the player they lost
+    console.log("YOU LOSE!");
+    // Reset the enemy's position
+    enemyX = 0;
+    enemyY = random(0,height);
+    // Reset the enemy's size and speed
+    enemySize = 50;
+    enemySpeed = 5;
+    // Reset the avatar's position
+    avatarX = width/2;
+    avatarY = height/2;
+    // Reset the dodge counter
+    dodges = 0;
+  }
+
+  // Check if the avatar has gone off the screen (cheating!)
+  if (avatarX < 0 || avatarX > width || avatarY < 0 || avatarY > height) {
+    // If they went off the screen they lose in the same way as above.
+    console.log("YOU LOSE!");
+    enemyX = 0;
+    enemyY = random(0,height);
+    enemySize = 50;
+    enemySpeed = 5;
+    avatarX = width/2;
+    avatarY = height/2;
+    dodges = 0;
+  }
+
+  // Check if the enemy has moved all the way across the screen
+  if (enemyX > width) {
+    // This means the player dodged so update its dodge statistic
+    dodges = dodges + 1;
+    // Tell them how many dodges they have made
+    console.log(dodges + " DODGES!");
+    // Reset the enemy's position to the left at a random height
+    enemyX = 0;
+    enemyY = random(0,height);
+    // Increase the enemy's speed and size to make the game harder
+    enemySpeed = enemySpeed + enemySpeedIncrease;
+    enemySize = enemySize + enemySizeIncrease;
+  }
+
+  // Display the current number of successful in the console
+  console.log(dodges);
+
+  // The player is black
+  fill(0);
+  // Draw the player as a circle
+  ellipse(avatarX,avatarY,avatarSize,avatarSize);
+
+  // The enemy is red
+  fill(255,0,0);
+  // Draw the enemy as a circle
+  ellipse(enemyX,enemyY,enemySize,enemySize);
+
 }
