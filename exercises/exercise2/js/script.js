@@ -203,7 +203,7 @@ function lose(){
   //reset();
 }
 function reset(){
-  console.log("i am alive");
+  //console.log("i am alive");
   enemyX = 0;
   enemyX2 = random(0,width);
   enemyY = random(0,height);
@@ -224,7 +224,7 @@ function enemyReset(){
   // This means the player dodged so update its dodge statistic
   dodges = dodges + 2; //since dodging 2 enemies now
   // Tell them how many dodges they have made
-  console.log(dodges + " DODGES!");
+  //console.log(dodges + " DODGES!");
   // Reset the enemy's position to the left at a random height
   enemyX = 0;
   enemyX2 = random(0,width);
