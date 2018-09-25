@@ -216,6 +216,7 @@ function draw() {
     enemySpeed = enemySpeed + enemySpeedIncrease;
     enemySize = enemySize + enemySizeIncrease;
     avatarSize = random(10,100);
+    avatarSpeed = random(5,50);
   }
 
   // Display the current number of successful in the console
