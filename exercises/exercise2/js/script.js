@@ -33,6 +33,32 @@ var enemySpeedIncrease = 0.5;
 // How many dodges the player has made
 var dodges = 0;
 
+//the font
+var font;
+
+//the player avatar
+var avatar;
+
+//the background
+var bg;
+
+//avatar size
+var avatarSize;
+
+//the enemy
+var enemy;
+
+//loss
+var lose = false;
+//preload
+//
+//preloading the font
+function preload(){
+    avatar = loadImage('assets/images/golden_butterfly.png');
+    enemy = loadImage('assets/images/spiderweb.png');
+    //loading the superior font
+    //font = loadFont("assets/fonts/hel.ttf");
+}
 // setup()
 //
 // Make the canvas, position the avatar and anemy
@@ -47,9 +73,6 @@ function setup() {
   // Put the enemy to the left at a random y coordinate within the canvas
   enemyX = 0;
   enemyY = random(0,height);
-
-  // No stroke so it looks cleaner
-  noStroke();
 }
 
 // draw()
@@ -57,6 +80,8 @@ function setup() {
 // Handle moving the avatar and enemy and checking for dodges and
 // game over situations.
 function draw() {
+
+
   // A pink background
   background(255,220,220);
 
@@ -99,7 +124,6 @@ function draw() {
   if (dist(enemyX,enemyY,avatarX,avatarY) < enemySize/2 + avatarSize/2) {
     // Tell the player they lost
     console.log("YOU LOSE!");
-    // Reset the enemy's position
     enemyX = 0;
     enemyY = random(0,height);
     // Reset the enemy's size and speed
@@ -137,19 +161,56 @@ function draw() {
     // Increase the enemy's speed and size to make the game harder
     enemySpeed = enemySpeed + enemySpeedIncrease;
     enemySize = enemySize + enemySizeIncrease;
+    avatarSize = random(10,100);
   }
 
   // Display the current number of successful in the console
   console.log(dodges);
 
-  // The player is black
-  fill(0);
-  // Draw the player as a circle
-  ellipse(avatarX,avatarY,avatarSize,avatarSize);
+  // Draw the player as a butterfly
+    image(avatar,avatarX,avatarY,avatarSize,avatarSize);
 
-  // The enemy is red
-  fill(255,0,0);
-  // Draw the enemy as a circle
-  ellipse(enemyX,enemyY,enemySize,enemySize);
+
+  // Draw the enemy as a spider
+
+  image(enemy,enemyX,enemyY,enemySize,enemySize);
+
+  //on screen score
+//  textFont(font);
+  textAlign(RIGHT);
+  textSize(16);
+  fill(0);
+  stroke(255);
+  text('Score: ' + dodges,490,15);
+}
+
+  //check if lost
+  /*  if (lose === true) {
+      //YOU LOSE!!
+      textAlign(CENTER);
+      textSize(36);
+      textStyle(BOLD);
+      text('YOU LOSE!',250,250);
+
+      //pausing for a second to let the player take in their incompetency
+
+      }
 
 }
+/*
+//reset the game
+function reset() {
+  setInterval(1000);
+  // Reset the enemy's position
+  enemyX = 0;
+  enemyY = random(0,height);
+  // Reset the enemy's size and speed
+  enemySize = 50;
+  enemySpeed = 5;
+  // Reset the avatar's position
+  avatarX = width/2;
+  avatarY = height/2;
+  // Reset the dodge counter
+  dodges = 0;
+  lose= false;
+*/
