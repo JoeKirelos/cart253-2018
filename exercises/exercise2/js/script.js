@@ -60,11 +60,7 @@ var avatarSize;
 var enemy;
 var enemy2;
 
-
-//loss
-var lose = false;
-//won
-var win = false;
+var resetting = false;
 //preload
 //
 //preloading the font
@@ -98,6 +94,9 @@ function setup() {
 // game over situations.
 function draw() {
 
+if (resetting) {
+  return;
+}
 
   // A pink background
   background(bg,500,500);
@@ -141,103 +140,27 @@ function draw() {
   // We do this by checking if the distance between the centre of the enemy
   // and the centre of the avatar is less that their combined radii
   if (dist(enemyX,enemyY,avatarX,avatarY) < enemySize/2 + avatarSize/2) {
-    // Tell the player they lost
-    console.log("YOU LOSE!");
-    lose = true;
-    enemyX = 0;
-    enemyX2 = random(0,width);
-    enemyY = random(0,height);
-    enemyY2 = 0;
-    // Reset the enemy's size and speed
-    enemySize = 50;
-    enemySpeed = 5;
-    // Reset the avatar's position
-    avatarX = width/2;
-    avatarY = height/2;
-    // Reset the dodge counter
-    dodges = 0;
-    lose=false;
+    lose();
   }
   if (dist(enemyX2,enemyY2,avatarX,avatarY) < enemySize/2 + avatarSize/2) {
-    // Tell the player they lost
-    console.log("YOU LOSE!");
-    lose = true;
-    enemyX = 0;
-    enemyX2 = random(0,width);
-    enemyY = random(0,height);
-    enemyY2 = 0;
-    // Reset the enemy's size and speed
-    enemySize = 50;
-    enemySpeed = 5;
-    // Reset the avatar's position
-    avatarX = width/2;
-    avatarY = height/2;
-    // Reset the dodge counter
-    dodges = 0;
-    lose=false;
+    lose();
   }
 
   // Check if the avatar has gone off the screen (cheating!)
   if (avatarX < 0 || avatarX > width || avatarY < 0 || avatarY > height) {
     // If they went off the screen they lose in the same way as above.
-    console.log("YOU LOSE!");
-    lose = true;
-    enemyX = 0;
-    enemyX2 = random(0,width);
-    enemyY = random(0,height);
-    enemyY2 = 0;
-    enemySize = 50;
-    enemySpeed = 5;
-    avatarX = width/2;
-    avatarY = height/2;
-    dodges = 0;
-    lose=false;
+    lose();
   }
 
   // Check if the enemy has moved all the way across the screen
   if (enemyX > width) {
-    // This means the player dodged so update its dodge statistic
-    dodges = dodges + 2;
-    // Tell them how many dodges they have made
-    console.log(dodges + " DODGES!");
-    // Reset the enemy's position to the left at a random height
-    enemyX = 0;
-    enemyX2 = random(0,width);
-    enemyY = random(0,height);
-    enemyY2 = 0;
-    // Increase the enemy's speed and size to make the game harder
-    enemySpeed = enemySpeed + enemySpeedIncrease;
-    enemySize = enemySize + enemySizeIncrease;
-    avatarSize = random(10,100);
+    enemyReset();
   }
   if (enemyY > height) {
-    // This means the player dodged so update its dodge statistic
-    dodges = dodges + 2; //since dodging 2 enemies now
-    // Tell them how many dodges they have made
-    console.log(dodges + " DODGES!");
-    // Reset the enemy's position to the left at a random height
-    enemyX = 0;
-    enemyX2 = random(0,width);
-    enemyY = random(0,height);
-    enemyY2 = 0;
-    // Increase the enemy's speed and size to make the game harder
-    enemySpeed = enemySpeed + enemySpeedIncrease;
-    enemySize = enemySize + enemySizeIncrease;
-    avatarSize = random(10,100);
-    avatarSpeed = random(5,50);
+    enemyReset();
   }
   if (dodges === 20){
-    win = true;
-    enemyX = 0;
-    enemyX2 = random(0,width);
-    enemyY = random(0,height);
-    enemyY2 = 0;
-    // Increase the enemy's speed and size to make the game harder
-    enemySpeed = enemySpeed + enemySpeedIncrease;
-    enemySize = enemySize + enemySizeIncrease;
-    avatarSize = random(10,100);
-    avatarSpeed = random(5,50);
-    win=false;
+    win()
   }
 
   // Display the current number of successful in the console
@@ -259,20 +182,57 @@ function draw() {
   stroke(0);
   text('Score: ' + dodges,490,20);
 }
-
-  //check if lost
-  if (lose === true) {
-      //YOU LOSE!!
-      textAlign(CENTER);
-      textSize(36);
-      textStyle(BOLD);
-      text('YOU LOSE!',250,250);
-    }
-  //check if won
-  if (win === true) {
-      //YOU WIN!!
-      textAlign(CENTER);
-      textSize(36);
-      textStyle(BOLD);
-      text('YOU WIN!',250,250);
-    }
+function win(){
+  //YOU WIN!!
+  textAlign(CENTER);
+  textSize(36);
+  textStyle(BOLD);
+  text('YOU WIN!',250,250);
+  setTimeout(reset,1000);
+  resetting = true;
+  //reset();
+}
+function lose(){
+  //YOU LOSE!!
+  textAlign(CENTER);
+  textSize(36);
+  textStyle(BOLD);
+  text('YOU LOSE!',250,250);
+  setTimeout(reset,1000);
+  resetting = true;
+  //reset();
+}
+function reset(){
+  console.log("i am alive");
+  enemyX = 0;
+  enemyX2 = random(0,width);
+  enemyY = random(0,height);
+  enemyY2 = 0;
+  // Reset the enemy's size and speed
+  enemySize = 50;
+  enemySpeed = 5;
+  // Reset the avatar's position
+  avatarX = width/2;
+  avatarY = height/2;
+  // Reset the dodge counter
+  dodges = 0;
+  avatarSize = random(10,100);
+  avatarSpeed = random(5,50);
+  resetting = false;
+}
+function enemyReset(){
+  // This means the player dodged so update its dodge statistic
+  dodges = dodges + 2; //since dodging 2 enemies now
+  // Tell them how many dodges they have made
+  console.log(dodges + " DODGES!");
+  // Reset the enemy's position to the left at a random height
+  enemyX = 0;
+  enemyX2 = random(0,width);
+  enemyY = random(0,height);
+  enemyY2 = 0;
+  // Increase the enemy's speed and size to make the game harder
+  enemySpeed = enemySpeed + enemySpeedIncrease;
+  enemySize = enemySize + enemySizeIncrease;
+  avatarSize = random(10,100);
+  avatarSpeed = random(5,50);
+}
