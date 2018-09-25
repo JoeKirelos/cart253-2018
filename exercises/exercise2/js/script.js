@@ -233,6 +233,8 @@ function enemyReset(){
   // Increase the enemy's speed and size to make the game harder
   enemySpeed = enemySpeed + enemySpeedIncrease;
   enemySize = enemySize + enemySizeIncrease;
-  avatarSize = random(10,100);
-  avatarSpeed = random(5,50);
+  avatarSize = constrain(avatarSize,10,100);
+  avatarSize += random(-5,5);
+  avatarSpeed = constrain(avatarSpeed,5,15);
+  avatarSpeed += random(-5,5);
 }
