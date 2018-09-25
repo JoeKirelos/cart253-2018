@@ -63,6 +63,8 @@ var enemy2;
 
 //loss
 var lose = false;
+//won
+var win = false;
 //preload
 //
 //preloading the font
@@ -141,6 +143,7 @@ function draw() {
   if (dist(enemyX,enemyY,avatarX,avatarY) < enemySize/2 + avatarSize/2) {
     // Tell the player they lost
     console.log("YOU LOSE!");
+    lose = true;
     enemyX = 0;
     enemyX2 = random(0,width);
     enemyY = random(0,height);
@@ -153,10 +156,12 @@ function draw() {
     avatarY = height/2;
     // Reset the dodge counter
     dodges = 0;
+    lose=false;
   }
   if (dist(enemyX2,enemyY2,avatarX,avatarY) < enemySize/2 + avatarSize/2) {
     // Tell the player they lost
     console.log("YOU LOSE!");
+    lose = true;
     enemyX = 0;
     enemyX2 = random(0,width);
     enemyY = random(0,height);
@@ -169,12 +174,14 @@ function draw() {
     avatarY = height/2;
     // Reset the dodge counter
     dodges = 0;
+    lose=false;
   }
 
   // Check if the avatar has gone off the screen (cheating!)
   if (avatarX < 0 || avatarX > width || avatarY < 0 || avatarY > height) {
     // If they went off the screen they lose in the same way as above.
     console.log("YOU LOSE!");
+    lose = true;
     enemyX = 0;
     enemyX2 = random(0,width);
     enemyY = random(0,height);
@@ -184,12 +191,13 @@ function draw() {
     avatarX = width/2;
     avatarY = height/2;
     dodges = 0;
+    lose=false;
   }
 
   // Check if the enemy has moved all the way across the screen
   if (enemyX > width) {
     // This means the player dodged so update its dodge statistic
-    dodges = dodges + 1;
+    dodges = dodges + 2;
     // Tell them how many dodges they have made
     console.log(dodges + " DODGES!");
     // Reset the enemy's position to the left at a random height
@@ -204,7 +212,7 @@ function draw() {
   }
   if (enemyY > height) {
     // This means the player dodged so update its dodge statistic
-    dodges = dodges + 1;
+    dodges = dodges + 2; //since dodging 2 enemies now
     // Tell them how many dodges they have made
     console.log(dodges + " DODGES!");
     // Reset the enemy's position to the left at a random height
@@ -218,12 +226,25 @@ function draw() {
     avatarSize = random(10,100);
     avatarSpeed = random(5,50);
   }
+  if (dodges === 20){
+    win = true;
+    enemyX = 0;
+    enemyX2 = random(0,width);
+    enemyY = random(0,height);
+    enemyY2 = 0;
+    // Increase the enemy's speed and size to make the game harder
+    enemySpeed = enemySpeed + enemySpeedIncrease;
+    enemySize = enemySize + enemySizeIncrease;
+    avatarSize = random(10,100);
+    avatarSpeed = random(5,50);
+    win=false;
+  }
 
   // Display the current number of successful in the console
   console.log(dodges);
 
   // Draw the player as a butterfly
-    image(avatar,avatarX,avatarY,avatarSize,avatarSize);
+  image(avatar,avatarX,avatarY,avatarSize,avatarSize);
 
 
   // Draw the enemy as a spiderweb and a spider)
@@ -240,32 +261,18 @@ function draw() {
 }
 
   //check if lost
-  /*  if (lose === true) {
+  if (lose === true) {
       //YOU LOSE!!
       textAlign(CENTER);
       textSize(36);
       textStyle(BOLD);
       text('YOU LOSE!',250,250);
-
-      //pausing for a second to let the player take in their incompetency
-
-      }
-
-}
-/*
-//reset the game
-function reset() {
-  setInterval(1000);
-  // Reset the enemy's position
-  enemyX = 0;
-  enemyY = random(0,height);
-  // Reset the enemy's size and speed
-  enemySize = 50;
-  enemySpeed = 5;
-  // Reset the avatar's position
-  avatarX = width/2;
-  avatarY = height/2;
-  // Reset the dodge counter
-  dodges = 0;
-  lose= false;
-*/
+    }
+  //check if won
+  if (win === true) {
+      //YOU WIN!!
+      textAlign(CENTER);
+      textSize(36);
+      textStyle(BOLD);
+      text('YOU WIN!',250,250);
+    }
