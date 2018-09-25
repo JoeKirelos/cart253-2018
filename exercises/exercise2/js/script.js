@@ -29,6 +29,17 @@ var enemySpeed = 5;
 var enemyVX = 5;
 // How much bigger the enemy circle gets with each successful dodge
 var enemySpeedIncrease = 0.5;
+// The position and size of the enemy circle
+var enemyX2;
+var enemyY2;
+var enemySize = 50;
+// How much bigger the enemy circle gets with each successful dodge
+var enemySizeIncrease = 5;
+
+// The speed and velocity of our enemy circle
+var enemyVY = 5;
+// How much bigger the enemy circle gets with each successful dodge
+var enemySpeedIncrease = 0.5;
 
 // How many dodges the player has made
 var dodges = 0;
@@ -47,6 +58,8 @@ var avatarSize;
 
 //the enemy
 var enemy;
+var enemy2;
+
 
 //loss
 var lose = false;
@@ -56,8 +69,10 @@ var lose = false;
 function preload(){
     avatar = loadImage('assets/images/golden_butterfly.png');
     enemy = loadImage('assets/images/spiderweb.png');
+    bg = loadImage('assets/images/spiderface.jpg');
+    enemy2 = loadImage('assets/images/red_spider.png');
     //loading the superior font
-    //font = loadFont("assets/fonts/hel.ttf");
+    font = loadFont("assets/fonts/hel.ttf");
 }
 // setup()
 //
@@ -83,7 +98,7 @@ function draw() {
 
 
   // A pink background
-  background(255,220,220);
+  background(bg,500,500);
 
   // Default the avatar's velocity to 0 in case no key is pressed this frame
   avatarVX = 0;
@@ -115,8 +130,10 @@ function draw() {
 
   // The enemy always moves at enemySpeed (which increases)
   enemyVX = enemySpeed;
+  enemyVY = enemySpeed;
   // Update the enemy's position based on its velocity
   enemyX = enemyX + enemyVX;
+  enemyY2 = enemyY2 + enemyVY;
 
   // Check if the enemy and avatar overlap - if they do the player loses
   // We do this by checking if the distance between the centre of the enemy
@@ -125,7 +142,25 @@ function draw() {
     // Tell the player they lost
     console.log("YOU LOSE!");
     enemyX = 0;
+    enemyX2 = random(0,width);
     enemyY = random(0,height);
+    enemyY2 = 0;
+    // Reset the enemy's size and speed
+    enemySize = 50;
+    enemySpeed = 5;
+    // Reset the avatar's position
+    avatarX = width/2;
+    avatarY = height/2;
+    // Reset the dodge counter
+    dodges = 0;
+  }
+  if (dist(enemyX2,enemyY2,avatarX,avatarY) < enemySize/2 + avatarSize/2) {
+    // Tell the player they lost
+    console.log("YOU LOSE!");
+    enemyX = 0;
+    enemyX2 = random(0,width);
+    enemyY = random(0,height);
+    enemyY2 = 0;
     // Reset the enemy's size and speed
     enemySize = 50;
     enemySpeed = 5;
@@ -141,7 +176,9 @@ function draw() {
     // If they went off the screen they lose in the same way as above.
     console.log("YOU LOSE!");
     enemyX = 0;
+    enemyX2 = random(0,width);
     enemyY = random(0,height);
+    enemyY2 = 0;
     enemySize = 50;
     enemySpeed = 5;
     avatarX = width/2;
@@ -157,7 +194,24 @@ function draw() {
     console.log(dodges + " DODGES!");
     // Reset the enemy's position to the left at a random height
     enemyX = 0;
+    enemyX2 = random(0,width);
     enemyY = random(0,height);
+    enemyY2 = 0;
+    // Increase the enemy's speed and size to make the game harder
+    enemySpeed = enemySpeed + enemySpeedIncrease;
+    enemySize = enemySize + enemySizeIncrease;
+    avatarSize = random(10,100);
+  }
+  if (enemyY > height) {
+    // This means the player dodged so update its dodge statistic
+    dodges = dodges + 1;
+    // Tell them how many dodges they have made
+    console.log(dodges + " DODGES!");
+    // Reset the enemy's position to the left at a random height
+    enemyX = 0;
+    enemyX2 = random(0,width);
+    enemyY = random(0,height);
+    enemyY2 = 0;
     // Increase the enemy's speed and size to make the game harder
     enemySpeed = enemySpeed + enemySpeedIncrease;
     enemySize = enemySize + enemySizeIncrease;
@@ -171,17 +225,17 @@ function draw() {
     image(avatar,avatarX,avatarY,avatarSize,avatarSize);
 
 
-  // Draw the enemy as a spider
-
+  // Draw the enemy as a spiderweb and a spider)
+  image(enemy2,enemyX2,enemyY2,enemySize,enemySize);
   image(enemy,enemyX,enemyY,enemySize,enemySize);
 
   //on screen score
-//  textFont(font);
+  textFont(font);
   textAlign(RIGHT);
-  textSize(16);
-  fill(0);
-  stroke(255);
-  text('Score: ' + dodges,490,15);
+  textSize(24);
+  fill(255);
+  stroke(0);
+  text('Score: ' + dodges,490,20);
 }
 
   //check if lost
