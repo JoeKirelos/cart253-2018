@@ -27,6 +27,9 @@ var decoyImage8;
 var decoyImage9;
 var decoyImage10;
 
+//image for interface
+var doggo;
+
 // The number of decoys to show on the screen, randomly
 // chosen from the decoy images
 var numDecoys = 100;
@@ -39,6 +42,8 @@ var gameOver = false;
 // Loads the target and decoy images before the program starts
 function preload() {
   targetImage = loadImage("assets/images/animals-target.png");
+
+  doggo = loadImage("assets/images/animals-target.png");
 
   decoyImage1 = loadImage("assets/images/animals-01.png");
   decoyImage2 = loadImage("assets/images/animals-02.png");
@@ -102,6 +107,15 @@ function setup() {
       image(decoyImage10,x,y);
     }
   }
+  //draw rectangle in top right corner
+  fill(255,0,255);
+  rect(width-200,0,200,120);
+  //draw doggo inside rectangle
+  image(doggo,width-100,50);
+  //some flavor text
+  fill(255,0,0);
+  textSize(32);
+  text('Find Doggo !!',width-200,150);
 
   // Once we've displayed all decoys, we choose a location for the target
   targetX = random(0,width);
