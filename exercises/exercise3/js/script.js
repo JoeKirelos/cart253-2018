@@ -17,7 +17,7 @@ var targetImage;
 
 var targetvX;
 var targetvY;
-var targetSpeed = 5;
+var targetSpeed = 15;
 
 // The ten decoy images
 var decoyImage1;
@@ -144,7 +144,7 @@ function draw() {
     noStroke();
     fill(random(255));
     // Tell them they won!
-    text("YOU WINNED!",width/2,height/2);
+    text("HEY LET'S PLAY",width/2,height/2);
 
     targetvX = targetSpeed;
     targetvY = targetSpeed;
