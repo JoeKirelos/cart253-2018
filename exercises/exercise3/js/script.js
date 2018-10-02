@@ -108,14 +108,17 @@ function setup() {
     }
   }
   //draw rectangle in top right corner
-  fill(255,0,255);
-  rect(width-200,0,200,120);
+  strokeWeight(4);
+  stroke(218,112,214);
+  fill(238,130,238);
+  rect(width-240,2,220,150);
   //draw doggo inside rectangle
   image(doggo,width-100,50);
   //some flavor text
+  noStroke();
   fill(255,0,0);
   textSize(32);
-  text('Find Doggo !!',width-200,150);
+  text('Find Doggo !!',width-220,120);
 
   // Once we've displayed all decoys, we choose a location for the target
   targetX = random(0,width);
