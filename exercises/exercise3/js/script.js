@@ -31,6 +31,7 @@ var decoyImage8;
 var decoyImage9;
 var decoyImage10;
 
+
 //image for interface
 var doggo;
 
@@ -70,45 +71,47 @@ function setup() {
   background("#ffff00");
   imageMode(CENTER);
 
+  numDecoys=random(100,500);
   // Use a for loop to draw as many decoys as we need
   for (var i = 0; i < numDecoys; i++) {
     // Choose a random location for this decoy
     var x = random(0,width);
     var y = random(0,height);
+    var scale = random(0.5,1.5);
     // Generate a random number we can use for probability
     var r = random();
     // Use the random number to display one of the ten decoy
     // images, each with a 10% chance of being shown
     // We'll talk more about this nice quality of random soon enough
     if (r < 0.1) {
-      image(decoyImage1,x,y);
+      image(decoyImage1,x,y,decoyImage1.width*scale,decoyImage1.height*scale);
     }
     else if (r < 0.2) {
-      image(decoyImage2,x,y);
+      image(decoyImage2,x,y,decoyImage2.width*scale,decoyImage2.height*scale);
     }
     else if (r < 0.3) {
-      image(decoyImage3,x,y);
+      image(decoyImage3,x,y,decoyImage3.width*scale,decoyImage3.height*scale);
     }
     else if (r < 0.4) {
-      image(decoyImage4,x,y);
+      image(decoyImage4,x,y,decoyImage4.width*scale,decoyImage4.height*scale);
     }
     else if (r < 0.5) {
-      image(decoyImage5,x,y);
+      image(decoyImage5,x,y,decoyImage5.width*scale,decoyImage5.height*scale);
     }
     else if (r < 0.6) {
-      image(decoyImage6,x,y);
+      image(decoyImage6,x,y,decoyImage6.width*scale,decoyImage6.height*scale);
     }
     else if (r < 0.7) {
-      image(decoyImage7,x,y);
+      image(decoyImage7,x,y,decoyImage7.width*scale,decoyImage7.height*scale);
     }
     else if (r < 0.8) {
-      image(decoyImage8,x,y);
+      image(decoyImage8,x,y,decoyImage8.width*scale,decoyImage8.height*scale);
     }
     else if (r < 0.9) {
-      image(decoyImage9,x,y);
+      image(decoyImage9,x,y,decoyImage9.width*scale,decoyImage9.height*scale);
     }
     else if (r < 1.0) {
-      image(decoyImage10,x,y);
+      image(decoyImage10,x,y,decoyImage10.width*scale,decoyImage10.height*scale);
     }
   }
   //draw rectangle in top right corner
