@@ -15,6 +15,7 @@ var targetX;
 var targetY;
 var targetImage;
 
+//the speed at which doggo loves you
 var targetvX;
 var targetvY;
 var targetSpeed = 15;
@@ -70,11 +71,11 @@ function setup() {
   createCanvas(windowWidth,windowHeight);
   background("#ffff00");
   imageMode(CENTER);
-
+//random number of decoys
   numDecoys=random(100,500);
   // Use a for loop to draw as many decoys as we need
   for (var i = 0; i < numDecoys; i++) {
-    // Choose a random location for this decoy
+    // Choose a random location and size for this decoy
     var x = random(0,width);
     var y = random(0,height);
     var scale = random(0.5,1.5);
@@ -146,9 +147,9 @@ function draw() {
     textAlign(CENTER,CENTER);
     noStroke();
     fill(random(255));
-    // Tell them they won!
+    // Ask them to play!
     text("HEY LET'S PLAY",width/2,height/2);
-
+    //make doggo run around randomly and loop around screen
     targetvX = targetSpeed;
     targetvY = targetSpeed;
     targetX += random(-targetvX,targetvX);
