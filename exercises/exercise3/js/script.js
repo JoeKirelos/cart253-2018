@@ -15,6 +15,10 @@ var targetX;
 var targetY;
 var targetImage;
 
+var targetvX;
+var targetvY;
+var targetSpeed = 5;
+
 // The ten decoy images
 var decoyImage1;
 var decoyImage2;
@@ -142,12 +146,25 @@ function draw() {
     // Tell them they won!
     text("YOU WINNED!",width/2,height/2);
 
-    noFill();
-    stroke(random(255));
-    strokeWeight(10);
-    ellipse(targetX,targetY,targetImage.width,targetImage.height);
+    targetvX = targetSpeed;
+    targetvY = targetSpeed;
+    targetX += random(-targetvX,targetvX);
+    targetY += random(-targetvY,targetvY);
+    if(targetX>width){
+      targetX -= width;
+    }
+    else if (targetX<0){
+      targetX += width;
+    }
+    if(targetY>height){
+      targetY-=height;
+    }
+     else if(targetY<0){
+      targetY+=height;
+    }
+    image(targetImage,targetX,targetY);
+    }
   }
-}
 
 // mousePressed()
 //
