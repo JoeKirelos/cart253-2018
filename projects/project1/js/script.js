@@ -54,6 +54,13 @@ var sprint= 1;
 
 //health loss modifier
 var loss= 0.5;
+
+//web location
+var wX;
+var wY;
+
+//web timer
+var webTimer= 0;
 ////////new///////////
 // setup()
 //
@@ -106,6 +113,8 @@ function draw() {
     updateHealth();
     checkEating();
 
+    drawWeb();
+
     drawPrey();
     drawPlayer();
   }
@@ -116,7 +125,7 @@ function draw() {
 
 // handleInput()
 //
-// Checks arrow keys and adjusts player velocity accordingly
+// Checks WASD keys and adjusts player velocity accordingly
 function handleInput() {
   // Check for horizontal movement
   if (keyIsDown(65)) {
@@ -150,6 +159,8 @@ function handleInput() {
     sprint= 1;
     loss= 0.5;
   }
+
+
 }
   ///////////new//////////
 
@@ -228,16 +239,21 @@ function movePrey() {
   // Change the prey's velocity at set interval
     // Use map() to convert from the 0-1 range of the noise() function
     // to the appropriate range of velocities for the prey
-
     ////////new///////////
     preyVX = map(noise(tx),0,1,-preyMaxSpeed,preyMaxSpeed);
     preyVY = map(noise(ty),0,1,-preyMaxSpeed,preyMaxSpeed);
 
     tx+= 0.02;
     ty+= 0.02;
-    ////////new///////////
 
-  // Update prey position based on velocity
+  //if prey is webbed stop it from moving
+  var d = dist(wX,wY,preyX,preyY);
+  if (webTimer > 0 && d < 25 + preyRadius){
+    preyVX=0;
+    preyVY=0;
+  }
+      ////////new///////////
+// Update prey position based on velocity
   preyX += preyVX;
   preyY += preyVY;
 
@@ -256,6 +272,20 @@ function movePrey() {
     preyY -= height;
   }
 }
+/////////new//////////
+//draw the web where the player click and leave it there for 1 second
+function drawWeb() {
+  if (webTimer>0){
+    push();
+    fill(255,0,0);
+    ellipse(wX,wY,50,50);
+    pop();
+    webTimer--;
+  }
+}
+/////////new//////////
+
+
 // drawPrey()
 //
 // Draw the prey as an ellipse with alpha based on health
@@ -272,6 +302,18 @@ function drawPlayer() {
   ellipse(playerX,playerY,playerRadius*2);
 }
 
+/////////new///////////
+//draw web on mouse position
+// make sure player can't draw more than one web
+function mousePressed() {
+  if (webTimer>0){
+    return;
+  }
+  wX = mouseX;
+  wY = mouseY;
+  webTimer=60;
+}
+/////////new//////////
 // showGameOver()
 //
 // Display text about the game being over!
