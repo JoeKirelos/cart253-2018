@@ -70,6 +70,8 @@ var bfImage;
 
 //sounds
 var webSound;
+var cackle;
+var spiderSound;
 
 //preloading images
 
@@ -79,6 +81,8 @@ function preload() {
   spiderImage = loadImage('assets/images/red_spider.png');
   bfImage = loadImage('assets/images/golden_butterfly.png');
   webSound = new Audio('assets/sounds/web.wav');
+  cackle = new Audio('assets/sounds/cackle.wav');
+  spiderSound = new Audio ('assets/sounds/spider.wav');
 }
 
 ////////new///////////
@@ -87,8 +91,10 @@ function preload() {
 //
 // Sets up the basic elements of the game
 function setup() {
+  /////////////new//////////////
+  //wanted the canvas to be the size of the windowHeight but also wanted it to stay square so I set both width and height to window height
   createCanvas(windowHeight,windowHeight);
-
+//////////////new//////////////
   noStroke();
 
   setupPrey();
@@ -109,10 +115,12 @@ function setupPrey() {
 // setupPlayer()
 //
 // Initialises player position and health
+//intialises spider sound at 4 seconds.
 function setupPlayer() {
   playerX = 4*width/5;
   playerY = height/2;
   playerHealth = playerMaxHealth;
+  spiderSound.currentTime = 4;
 }
 
 // draw()
@@ -123,12 +131,13 @@ function setupPlayer() {
 // displays the two agents.
 // When the game is over, shows the game over screen.
 function draw() {
+  // I chose to keep the background the same color because I like the color scheme it has with the red spider and yellow butterfly
   background(100,100,200);
 
   if (!gameOver) {
     handleInput();
 
-    healthBar();
+    userInterface();
 
     movePlayer();
     movePrey();
@@ -153,24 +162,29 @@ function handleInput() {
   // Check for horizontal movement
   if (keyIsDown(65)) {
     playerVX = -playerMaxSpeed*sprint;
+    spiderSound.play();
   }
   else if (keyIsDown(68)) {
     playerVX = playerMaxSpeed*sprint;
+    spiderSound.play();
   }
   else {
     playerVX = 0;
-
+    spiderSound.pause();
   }
 
   // Check for vertical movement
   if (keyIsDown(87)) {
     playerVY = -playerMaxSpeed*sprint;
+    spiderSound.play();
   }
   else if (keyIsDown(83)) {
     playerVY = playerMaxSpeed*sprint;
+    spiderSound.play();
   }
   else {
     playerVY = 0;
+    spiderSound.pause();
   }
 
   ////////////new/////////////
@@ -212,13 +226,18 @@ function movePlayer() {
 }
 //////////new////////////
 //health bar
-function healthBar(){
+function userInterface(){
   var health = map(playerHealth,0,255,0,width);
   push();
   stroke(0);
   fill(255,0,0);
   rect(0,2,health,15);
   pop()
+  /*push()
+  fill(0,0,0,100);
+  rectMode(CENTER);
+  rect(width-75,height-12,150,25);*/
+
 }
 // updateHealth()
 //
@@ -351,6 +370,7 @@ function mousePressed() {
 //
 // Display text about the game being over!
 function showGameOver() {
+  cackle.play();
   textSize(32);
   textAlign(CENTER,CENTER);
   fill(0);
