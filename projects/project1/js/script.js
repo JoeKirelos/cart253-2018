@@ -19,7 +19,7 @@ var playerY;
 var playerRadius = 25;
 var playerVX = 0;
 var playerVY = 0;
-var playerMaxSpeed = 4;
+var playerMaxSpeed = 3;
 // Player health
 var playerHealth;
 var playerMaxHealth = 255;
@@ -32,7 +32,7 @@ var preyY;
 var preyRadius = 25;
 var preyVX;
 var preyVY;
-var preyMaxSpeed = 6;
+var preyMaxSpeed = 5;
 // Prey health
 var preyHealth;
 var preyMaxHealth = 100;
@@ -61,12 +61,30 @@ var wY;
 
 //web timer
 var webTimer= 0;
+
+//image vairables
+
+var webImage;
+var spiderImage;
+var bfImage;
+
+
+//preloading images
+
+function preload() {
+
+  webImage = loadImage('assets/images/spiderweb.png');
+  spiderImage = loadImage('assets/images/red_spider.png');
+  bfImage = loadImage('assets/images/golden_butterfly.png');
+}
+
 ////////new///////////
+
 // setup()
 //
 // Sets up the basic elements of the game
 function setup() {
-  createCanvas(windowWidth,windowHeight);
+  createCanvas(windowHeight,windowHeight);
 
   noStroke();
 
@@ -278,7 +296,7 @@ function drawWeb() {
   if (webTimer>0){
     push();
     fill(255,0,0);
-    ellipse(wX,wY,50,50);
+    image(webImage,wX,wY,50,50);
     pop();
     webTimer--;
   }
@@ -291,7 +309,7 @@ function drawWeb() {
 // Draw the prey as an ellipse with alpha based on health
 function drawPrey() {
   fill(preyFill,preyHealth);
-  ellipse(preyX,preyY,preyRadius*2);
+  image(bfImage,preyX,preyY,50,50);
 }
 
 // drawPlayer()
@@ -299,7 +317,7 @@ function drawPrey() {
 // Draw the player as an ellipse with alpha based on health
 function drawPlayer() {
   fill(playerFill,playerHealth);
-  ellipse(playerX,playerY,playerRadius*2);
+  image(spiderImage,playerX,playerY,50,50);
 }
 
 /////////new///////////
