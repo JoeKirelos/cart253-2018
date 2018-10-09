@@ -70,7 +70,6 @@ var bfImage;
 
 //sounds
 var webSound;
-var spiderSound;
 
 //preloading images
 
@@ -80,7 +79,6 @@ function preload() {
   spiderImage = loadImage('assets/images/red_spider.png');
   bfImage = loadImage('assets/images/golden_butterfly.png');
   webSound = new Audio('assets/sounds/web.wav');
-  spiderSound = new Audio('assets/sounds/spider.wav');
 }
 
 ////////new///////////
@@ -155,29 +153,24 @@ function handleInput() {
   // Check for horizontal movement
   if (keyIsDown(65)) {
     playerVX = -playerMaxSpeed*sprint;
-    spiderSound.play;
   }
   else if (keyIsDown(68)) {
     playerVX = playerMaxSpeed*sprint;
-    spiderSound.play;
   }
   else {
     playerVX = 0;
-    spiderSound.pause;
+
   }
 
   // Check for vertical movement
   if (keyIsDown(87)) {
     playerVY = -playerMaxSpeed*sprint;
-    spiderSound.play;
   }
   else if (keyIsDown(83)) {
     playerVY = playerMaxSpeed*sprint;
-    spiderSound.play;
   }
   else {
     playerVY = 0;
-    spiderSound.pause;
   }
 
   ////////////new/////////////
