@@ -68,6 +68,9 @@ var webImage;
 var spiderImage;
 var bfImage;
 
+//sounds
+var webSound;
+var spiderSound;
 
 //preloading images
 
@@ -76,6 +79,8 @@ function preload() {
   webImage = loadImage('assets/images/spiderweb.png');
   spiderImage = loadImage('assets/images/red_spider.png');
   bfImage = loadImage('assets/images/golden_butterfly.png');
+  webSound = new Audio('assets/sounds/web.wav');
+  spiderSound = new Audio('assets/sounds/spider.wav');
 }
 
 ////////new///////////
@@ -125,6 +130,8 @@ function draw() {
   if (!gameOver) {
     handleInput();
 
+    healthBar();
+
     movePlayer();
     movePrey();
 
@@ -148,23 +155,29 @@ function handleInput() {
   // Check for horizontal movement
   if (keyIsDown(65)) {
     playerVX = -playerMaxSpeed*sprint;
+    spiderSound.play;
   }
   else if (keyIsDown(68)) {
     playerVX = playerMaxSpeed*sprint;
+    spiderSound.play;
   }
   else {
     playerVX = 0;
+    spiderSound.pause;
   }
 
   // Check for vertical movement
   if (keyIsDown(87)) {
     playerVY = -playerMaxSpeed*sprint;
+    spiderSound.play;
   }
   else if (keyIsDown(83)) {
     playerVY = playerMaxSpeed*sprint;
+    spiderSound.play;
   }
   else {
     playerVY = 0;
+    spiderSound.pause;
   }
 
   ////////////new/////////////
@@ -177,8 +190,6 @@ function handleInput() {
     sprint= 1;
     loss= 0.5;
   }
-
-
 }
   ///////////new//////////
 
@@ -206,7 +217,16 @@ function movePlayer() {
     playerY -= height;
   }
 }
-
+//////////new////////////
+//health bar
+function healthBar(){
+  var health = map(playerHealth,0,255,0,width);
+  push();
+  stroke(0);
+  fill(255,0,0);
+  rect(0,2,health,15);
+  pop()
+}
 // updateHealth()
 //
 // Reduce the player's health (every frame)
@@ -327,6 +347,8 @@ function mousePressed() {
   if (webTimer>0){
     return;
   }
+  webSound.currentTime = 0.3;
+  webSound.play();
   wX = mouseX;
   wY = mouseY;
   webTimer=60;
