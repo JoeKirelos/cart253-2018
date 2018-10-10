@@ -73,9 +73,6 @@ var webSound;
 var cackle;
 var spiderSound;
 
-//gameover
-var gameO = false;
-
 //preloading images
 
 function preload() {
@@ -200,7 +197,6 @@ function handleInput() {
     sprint= 1;
     loss= 0.5;
   }
-
 }
   ///////////new//////////
 
@@ -384,7 +380,7 @@ function showGameOver() {
   textAlign(CENTER,CENTER);
   fill(0);
   var gameOverText = "GAME OVER\n";
-  gameOverText += "You ate " + preyEaten + " prey\n";
+  gameOverText += "You ate " + preyEaten + " butterfly(s)\n";
   gameOverText += "before you died."
   text(gameOverText,width/2,height/2);
 }
