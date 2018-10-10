@@ -22,7 +22,7 @@ var playerVY = 0;
 var playerMaxSpeed = 3;
 // Player health
 var playerHealth;
-var playerMaxHealth = 255;
+var playerMaxHealth = 300;
 // Player fill color
 var playerFill = 50;
 
@@ -72,6 +72,9 @@ var bfImage;
 var webSound;
 var cackle;
 var spiderSound;
+
+//gameover
+var gameO = false;
 
 //preloading images
 
@@ -197,6 +200,7 @@ function handleInput() {
     sprint= 1;
     loss= 0.5;
   }
+
 }
   ///////////new//////////
 
@@ -227,16 +231,20 @@ function movePlayer() {
 //////////new////////////
 //health bar
 function userInterface(){
-  var health = map(playerHealth,0,255,0,width);
+  var health = map(playerHealth,0,300,0,width);
   push();
   stroke(0);
   fill(255,0,0);
-  rect(0,2,health,15);
+  rect(0,5,health,15);
   pop()
-  /*push()
+  push()
   fill(0,0,0,100);
   rectMode(CENTER);
-  rect(width-75,height-12,150,25);*/
+  rect(width-75,height-12,250,100);
+  textAlign(RIGHT);
+  textSize(26);
+  fill(255,0,0);
+  text("click to lay web", width-10,height-30);
 
 }
 // updateHealth()
@@ -364,7 +372,8 @@ function mousePressed() {
   wX = mouseX;
   wY = mouseY;
   webTimer=60;
-}
+  }
+
 /////////new//////////
 // showGameOver()
 //
