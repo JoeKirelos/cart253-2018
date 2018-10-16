@@ -60,6 +60,7 @@ var rightPaddle = {
   score: 0 // added score property                            ///////////////NEW////////////////
 }
 
+
 // A variable to hold the beep sound we will play on bouncing
 var beepSFX;
 
@@ -263,6 +264,7 @@ function handleBallOffScreen() {
     ball.y = height/2;
     rightPaddle.score++;
     console.log(leftPaddle.score,rightPaddle.score);
+    reset();
   }
   if (ballLeft > width) {
       // Check for ball going off the right side
@@ -270,13 +272,22 @@ function handleBallOffScreen() {
     ball.y = height/2;
     leftPaddle.score++;
     console.log(leftPaddle.score,rightPaddle.score);
+    reset();
   }
-
     // NOTE that we don't change its velocity here so it just
     // carries on moving with the same velocity after its
     // position is reset.
     // This is where we would count points etc!
 }
+///////////////NEW/////////////////////
+function reset(){
+  ball.vx= -ball.vx; // launch towards winner
+  //random y velocity
+  ball.vy= ball.speed; // make sure it doesn't go out of control by resetting its value to default each time
+  ball.vy= random(0.5,1.5)*ball.vy; // randomize it by a factor of 3
+
+}
+///////////////END NEW/////////////////
 ///////////////NEW/////////////////////
 /*function handleLeftPaddleScore();{
 var leftPaddleColor=map(leftPaddle.score,0,25,0,255);
