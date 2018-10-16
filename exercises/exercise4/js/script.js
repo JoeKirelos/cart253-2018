@@ -39,7 +39,8 @@ var leftPaddle = {
   vy: 0,
   speed: 5,
   upKeyCode: 87, // The key code for W
-  downKeyCode: 83 // The key code for S
+  downKeyCode: 83, // The key code for S
+  score: 0 //added score property                              ///////////////NEW////////////////
 }
 
 // RIGHT PADDLE
@@ -55,7 +56,8 @@ var rightPaddle = {
   vy: 0,
   speed: 5,
   upKeyCode: 38, // The key code for the UP ARROW
-  downKeyCode: 40 // The key code for the DOWN ARROW
+  downKeyCode: 40, // The key code for the DOWN ARROW
+  score: 0 // added score property                            ///////////////NEW////////////////
 }
 
 // A variable to hold the beep sound we will play on bouncing
@@ -134,6 +136,7 @@ function draw() {
 
   // Handle the ball going off screen
   handleBallOffScreen();
+
 
   // Display the paddles and ball
   displayPaddle(leftPaddle);
@@ -251,19 +254,39 @@ function handleBallOffScreen() {
   // Calculate edges of ball for clearer if statement below
   var ballLeft = ball.x - ball.size/2;
   var ballRight = ball.x + ball.size/2;
+// If it went off either side, reset it to the centre
 
-  // Check for ball going off the sides
-  if (ballRight < 0 || ballLeft > width) {
-    // If it went off either side, reset it to the centre
+
+  if (ballRight < 0 ) {
+      // Check for ball going off the left side
     ball.x = width/2;
     ball.y = height/2;
+    rightPaddle.score++;
+    console.log(leftPaddle.score,rightPaddle.score);
+  }
+  if (ballLeft > width) {
+      // Check for ball going off the right side
+    ball.x = width/2;
+    ball.y = height/2;
+    leftPaddle.score++;
+    console.log(leftPaddle.score,rightPaddle.score);
+  }
+
     // NOTE that we don't change its velocity here so it just
     // carries on moving with the same velocity after its
     // position is reset.
     // This is where we would count points etc!
-  }
 }
-
+///////////////NEW/////////////////////
+/*function handleLeftPaddleScore();{
+var leftPaddleColor=map(leftPaddle.score,0,25,0,255);
+return(leftPaddleColor);
+}
+function handleRightPaddleScore();{
+var rightPaddleColor=map(rightPaddle.score,0,25,0,255);
+return(rightPaddleColor);
+}*/
+///////////////END NEW/////////////////
 // displayBall()
 //
 // Draws ball on screen based on its properties
@@ -275,5 +298,11 @@ function displayBall() {
 //
 // Draws the specified paddle on screen based on its properties
 function displayPaddle(paddle) {
+  ////////////////NEW///////////////////////
+  var paddleColor=map(paddle.score,0,25,255,0);
+  push();
+  fill(255,paddleColor,0+paddleColor);
   rect(paddle.x,paddle.y,paddle.w,paddle.h);
+  pop();
+  ///////////////END NEW///////////////////
 }
