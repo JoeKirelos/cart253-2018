@@ -64,6 +64,8 @@ var rightPaddle = {
 // A variable to hold the beep sound we will play on bouncing
 var beepSFX;
 
+var t=0;                                                     ///////////////NEW////////////////
+
 // preload()
 //
 // Loads the beep audio for the sound of bouncing
@@ -301,10 +303,18 @@ return(rightPaddleColor);
 // displayBall()
 //
 // Draws ball on screen based on its properties
+///////////////NEW/////////////////////
 function displayBall() {
   rect(ball.x,ball.y,ball.size,ball.size);
+  push();
+  var t = random(25,75);
+  for (var i = 0; i < t; i++ ) {
+    fill(0);
+    rect(ball.x+map(random(),0,1,-10,10),ball.y+map(random(),0,1,-10,10),1,1);
+  }
+  pop();
 }
-
+///////////////END NEW/////////////////////
 // displayPaddle(paddle)
 //
 // Draws the specified paddle on screen based on its properties
@@ -314,6 +324,13 @@ function displayPaddle(paddle) {
   push();
   fill(255,paddleColor,0+paddleColor);
   rect(paddle.x,paddle.y,paddle.w,paddle.h);
+  pop();
+  push();
+  var t = random(0,1050);
+  for (var i = 0; i < t; i++ ) {
+    fill(0,0,255);
+    rect(paddle.x+map(random(),0,1,-10,10),paddle.y+map(random(),0,1,-35,35),1,1);
+  }
   pop();
   ///////////////END NEW///////////////////
 }
