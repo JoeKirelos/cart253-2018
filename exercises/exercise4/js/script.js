@@ -63,6 +63,7 @@ var rightPaddle = {
 
 // A variable to hold the beep sound we will play on bouncing
 var beepSFX;
+var staticSound;                                              ///////////////NEW////////////////
 
 var t=0;                                                     ///////////////NEW////////////////
 
@@ -71,6 +72,7 @@ var t=0;                                                     ///////////////NEW/
 // Loads the beep audio for the sound of bouncing
 function preload() {
   beepSFX = new Audio("assets/sounds/beep.wav");
+  staticSound = new Audio('assets/sounds/static.wav')
 }
 
 // setup()
@@ -116,6 +118,7 @@ function setupBall() {
 //
 // Calls the appropriate functions to run the game
 function draw() {
+
   // Fill the background
   background(bgColor);
 
@@ -313,11 +316,18 @@ function displayBall() {
     rect(ball.x+map(random(),0,1,-10,10),ball.y+map(random(),0,1,-10,10),1,1);
   }
   pop();
+  staticSound.play();
+  staticSound.loop = true;
 }
 // displayPaddle(paddle)
 //
 // Draws the specified paddle on screen based on its properties
 function displayPaddle(paddle) {
+  if (paddle.y > height){
+    paddle.y = paddle.y- height;
+  }else if (paddle.y < 0){
+    paddle.y =+ height;
+  }
   var paddleColor=map(paddle.score,0,25,255,0);
   push();
   fill(255,paddleColor,0+paddleColor);
@@ -330,5 +340,6 @@ function displayPaddle(paddle) {
     rect(paddle.x+map(random(),0,1,-10,10),paddle.y+map(random(),0,1,-35,35),1,1);
   }
   pop();
+
   ///////////////END NEW///////////////////
 }
