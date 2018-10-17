@@ -63,10 +63,12 @@ var rightPaddle = {
 
 // A variable to hold the beep sound we will play on bouncing
 var beepSFX;
-var staticSound;                                              ///////////////NEW////////////////
+ ///////////////NEW////////////////
+var staticSound;
 
-var t=0;                                                     ///////////////NEW////////////////
-
+var gameOver = false ;
+var t=0;
+///////////////END NEW////////////////
 // preload()
 //
 // Loads the beep audio for the sound of bouncing
@@ -148,6 +150,11 @@ function draw() {
   displayPaddle(leftPaddle);
   displayPaddle(rightPaddle);
   displayBall();
+
+  // end Game
+  if (leftPaddle.score > 25 || rightPaddle.score > 25){
+  endGame();
+}
 }
 
 
@@ -309,6 +316,7 @@ return(rightPaddleColor);
 ///////////////NEW/////////////////////
 function displayBall() {
   rect(ball.x,ball.y,ball.size,ball.size);
+  if (gameOver=== true){
   push();
   var t = random(25,75);
   for (var i = 0; i < t; i++ ) {
@@ -316,8 +324,10 @@ function displayBall() {
     rect(ball.x+map(random(),0,1,-10,10),ball.y+map(random(),0,1,-10,10),1,1);
   }
   pop();
+} else {
   staticSound.play();
   staticSound.loop = true;
+}
 }
 // displayPaddle(paddle)
 //
@@ -333,6 +343,7 @@ function displayPaddle(paddle) {
   fill(255,paddleColor,0+paddleColor);
   rect(paddle.x,paddle.y,paddle.w,paddle.h);
   pop();
+  if (gameOver===false){
   push();
   var t = random(0,1050);
   for (var i = 0; i < t; i++ ) {
@@ -340,6 +351,12 @@ function displayPaddle(paddle) {
     rect(paddle.x+map(random(),0,1,-10,10),paddle.y+map(random(),0,1,-35,35),1,1);
   }
   pop();
+}
+
+}
+function endGame() {
+  staticSound.pause();
+  gameOver=true;
+}
 
   ///////////////END NEW///////////////////
-}
