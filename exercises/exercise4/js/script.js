@@ -314,12 +314,10 @@ function displayBall() {
   }
   pop();
 }
-///////////////END NEW/////////////////////
 // displayPaddle(paddle)
 //
 // Draws the specified paddle on screen based on its properties
 function displayPaddle(paddle) {
-  ////////////////NEW///////////////////////
   var paddleColor=map(paddle.score,0,25,255,0);
   push();
   fill(255,paddleColor,0+paddleColor);
