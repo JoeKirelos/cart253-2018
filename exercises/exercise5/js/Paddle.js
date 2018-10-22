@@ -42,10 +42,18 @@ Paddle.prototype.handleInput = function() {
 // update()
 // Update y position based on velocity
 // Constrain the resulting position to be within the canvas
+
+/////////////////New////////////////
+//allow edge wrap
 Paddle.prototype.update = function() {
   this.y += this.vy;
-  this.y = constrain(this.y,0,height-this.h);
+  if (this.y>height){
+    this.y-=height;
+  }if (this.y<0){
+    this.y+= height;
+  }
 }
+//////////////////End New////////////////
 
 // display()
 //
@@ -58,5 +66,14 @@ Paddle.prototype.display = function() {
   fill(255,color,color);
   rect(this.x,this.y,this.w,this.h);
   pop();
+  // add blue static inside of the PADDLES
+  push();
+  var t = random(0,800);
+  for (var i = 0; i < t; i++ ) {
+    fill(0,0,255);
+    noStroke()
+    rect(this.x+map(random(),0,1,0,10),this.y+map(random(),0,1,0,60),1,1);
+  }
+  pop()
   //////////////////END NEW//////////////
 }
