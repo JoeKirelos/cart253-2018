@@ -16,6 +16,8 @@ function Paddle(x,y,w,h,speed,downKey,upKey) {
   this.speed = speed;
   this.downKey = downKey;
   this.upKey = upKey;
+  //gave the paddles a score property
+  this.score = 0;                         //////////////////NEW//////////////////
 }
 
 // handleInput()
