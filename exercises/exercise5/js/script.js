@@ -1,9 +1,6 @@
-// Basic OO Pong
-// by Pippin Barr
-//
-// A primitive implementation of Pong with no scoring system
-// just the ability to play the game with the keyboard.
-//
+// not at all basic Pong
+// Joe!!
+// An abstract concept of noise shown in the form of pong, score matters but not in the traditional sense
 // Arrow keys control the right hand paddle, W and S control
 // the left hand paddle.
 //

@@ -2,6 +2,7 @@
 //
 // A class that defines how a paddle behaves, including the ability
 // to specify the input keys to move it up and down
+// as well as keep its score and change its appearance
 
 // Paddle constructor
 //
@@ -16,8 +17,10 @@ function Paddle(x,y,w,h,speed,downKey,upKey) {
   this.speed = speed;
   this.downKey = downKey;
   this.upKey = upKey;
+  //////////////////NEW//////////////////
   //gave the paddles a score property
-  this.score = 0;                         //////////////////NEW//////////////////
+  this.score = 0;
+  //////////////////END NEW//////////////////
 }
 
 // handleInput()
@@ -48,6 +51,10 @@ Paddle.prototype.update = function() {
 //
 // Draw the paddle as a rectangle on the screen
 Paddle.prototype.display = function() {
-  fill(255);
+  //////////////new///////////////////
+  //make the paddle get progressively redder based on the score
+  var color = map(this.score,0,25,255,0);
+  fill(255,color,color);
   rect(this.x,this.y,this.w,this.h);
+  //////////////////END NEW//////////////
 }
