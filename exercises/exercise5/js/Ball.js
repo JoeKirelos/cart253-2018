@@ -87,4 +87,18 @@ Ball.prototype.handleCollision = function(paddle) {
 Ball.prototype.reset = function () {
   this.x = width/2;
   this.y = height/2;
+  ///////////////NEW////////////
+  //invert the x velocity making the ball launch towards the paddle that scored the last point.
+  this.vx = -this.vx;
+  //reset y velocity each time to make sure it doesn't get too out of control by being exponentially faster or slower
+  this.vy = this.speed;
+  // add a random multiplier to the y velocity between half and one and a half time its original velocity
+  // in both the positive and negative so it can go up or down
+  // also made sure it can't have a multiplier of less than 0.5 either positive or negative as that would be too slow
+  var multiplier = random(-1.5,1.5);
+  while(multiplier>-0.5 && multiplier< 0.5){
+    multiplier = random(-1.5,1.5);
+  }
+  //console.log(multiplier);
+  this.vy = multiplier*this.vy;
 }

@@ -54,7 +54,9 @@ Paddle.prototype.display = function() {
   //////////////new///////////////////
   //make the paddle get progressively redder based on the score
   var color = map(this.score,0,25,255,0);
+  push();
   fill(255,color,color);
   rect(this.x,this.y,this.w,this.h);
+  pop();
   //////////////////END NEW//////////////
 }
