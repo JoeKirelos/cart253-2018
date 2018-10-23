@@ -3,6 +3,7 @@
 // A class to define how a ball behaves. Including bouncing on the top
 // and bottom edges of the canvas, going off the left and right sides,
 // and bouncing off paddles.
+// tracking score and becoming static 
 
 // Ball constructor
 //
@@ -14,6 +15,11 @@ function Ball(x,y,vx,vy,size,speed) {
   this.vy = vy;
   this.size = size;
   this.speed = speed;
+  //////////////////new/////////////////
+  //allow the ball to track score
+  this.leftScore = 0;
+  this.rightScore = 0;
+  ////////////////////end new//////////////
 }
 
 // update()
@@ -53,15 +59,27 @@ Ball.prototype.isOffScreen = function () {
     return 0;
   }
 }
-///////////////END NEW////////////////////
 
 // display()
 //
-// Draw the ball as a rectangle on the screen
+// Draw the ball as a circle on the screen
 Ball.prototype.display = function () {
   fill(255);
   ellipse(this.x,this.y,this.size,this.size);
+  //if either of the players manages to get a score of 25 the ball becomes static
+  if(this.leftScore >= 25 || this.rightScore >= 25){
+    push();
+    var t = random(0,300);
+    for (var i = 0; i < t; i++ ) {
+      fill(0);
+      noStroke()
+      //fills the ball with small rectanlges at a random offset from its center creating static
+      rect(this.x+map(random(),0,1,-5,5),this.y+map(random(),0,1,-5,5),1,1);
+    }
+    pop()
+  }
 }
+///////////////END NEW////////////////////
 
 // handleCollision(paddle)
 //
@@ -102,3 +120,15 @@ Ball.prototype.reset = function () {
   //console.log(multiplier);
   this.vy = multiplier*this.vy;
 }
+//allows the ball to track score in order to be able to change to static later
+Ball.prototype.scoreHandler = function () {
+ if(this.isOffScreen()===1){
+   this.rightScore++;
+   console.log(this.leftScore,this.rightScore)
+ }
+ if(this.isOffScreen()===2){
+   this.leftScore++;
+   console.log(this.leftScore,this.rightScore)
+  }
+}
+/////////////////////END NEW/////////////////

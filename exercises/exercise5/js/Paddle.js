@@ -66,14 +66,18 @@ Paddle.prototype.display = function() {
   fill(255,color,color);
   rect(this.x,this.y,this.w,this.h);
   pop();
-  // add blue static inside of the PADDLES
+  // add blue static inside of the PADDLES if score is less than 25
+  if(this.score<25){
   push();
   var t = random(0,800);
   for (var i = 0; i < t; i++ ) {
     fill(0,0,255);
     noStroke()
+    // each rectangle is a spot of the static offset the x and y of the paddle
+    // the loop draws a random number of them up to 800
     rect(this.x+map(random(),0,1,0,10),this.y+map(random(),0,1,0,60),1,1);
   }
   pop()
+}
   //////////////////END NEW//////////////
 }

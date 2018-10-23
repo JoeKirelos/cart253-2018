@@ -39,16 +39,17 @@ function draw() {
   leftPaddle.update();
   rightPaddle.update();
  ///////////////////new////////////////////
+  ball.scoreHandler();
  //if the ball  goes off screen to the left award the right paddle a point and vice versa, also reset ball if it goes off screen
   if (ball.isOffScreen()=== 1) {
     rightPaddle.score++;
     ball.reset();
-    console.log(leftPaddle.score,rightPaddle.score);
+    //console.log(leftPaddle.score,rightPaddle.score);
   }
   if (ball.isOffScreen()=== 2) {
     leftPaddle.score++;
     ball.reset();
-    console.log(leftPaddle.score,rightPaddle.score);
+    //console.log(leftPaddle.score,rightPaddle.score);
   }
   ///////////////////end new////////////////////
 
