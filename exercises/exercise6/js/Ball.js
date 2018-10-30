@@ -24,7 +24,7 @@ function Ball(x,y,vx,vy,size,speed) {
 ///////////////fixed removed extra d from update
 Ball.prototype.update = function () {
   // Update position with velocity
-  ///////////////fixed added a + to the = 
+  ///////////////fixed added a + to the =
   this.x += this.vx;
   this.y += this.vy;
 
@@ -75,7 +75,8 @@ Ball.prototype.handleCollision = function(paddle) {
       this.x -= this.vx;
       this.y -= this.vy;
       // Reverse x velocity to bounce
-      this.vx = this.vx;
+      /////////////////fixed added a - sign to reverse the x velocity
+      this.vx = -this.vx;
     }
   }
 }
