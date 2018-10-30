@@ -45,7 +45,8 @@ function draw() {
   leftPaddle.update();
   rightPaddle.update();
 
-  if (ball.isOffTheScreen())
+////////////////fixed added needed curly bracket
+  if (ball.isOffTheScreen()){
     reset();
   }
 
