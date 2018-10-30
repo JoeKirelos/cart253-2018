@@ -41,7 +41,8 @@ function draw() {
   leftPaddle.handleInput();
   rightPaddle.handleInput();
 
-  ball.update;
+  /////////////////fixed added parenthesis to the end of the function
+  ball.update();
   leftPaddle.update();
   rightPaddle.update();
 
