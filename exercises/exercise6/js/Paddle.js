@@ -51,5 +51,4 @@ Paddle.prototype.update = function() {
 Paddle.prototype.display = function() {
   //////////////fixed rectangle to rect
   rect(this.x,this.y,this.w,this.h);
-  console.log(this.y)
 }
