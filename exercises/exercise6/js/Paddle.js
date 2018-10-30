@@ -5,7 +5,8 @@
 ///////////////////fixed commented out comments
 //Paddle constructor
 //Sets the properties with the provided arguments or defaults
-function Pladdle(x,y,w,h,speed,downKey,upKey) {
+////////////////fixed pladdle to paddle
+function Paddle(x,y,w,h,speed,downKey,upKey) {
   this.x = x;
   this.y = y;
   this.xv = 0;
@@ -21,7 +22,8 @@ function Pladdle(x,y,w,h,speed,downKey,upKey) {
 //
 // Check if the up or down keys are pressed and update velocity
 // appropriately
-Paddle.proto.handleInput = function() {
+////////////fixed proto to prototype
+Paddle.prototype.handleInput = function() {
   if (keyDown(upKey)) {
     this.vy = -this.speed;
   }
@@ -41,7 +43,7 @@ Paddle.prototype.update = function() {
 // display()
 //
 // Draw the paddle as a rectangle on the screen
-////////////////fixed removed extra parenthesis 
+////////////////fixed removed extra parenthesis
 Paddle.prototype.disploy = function() {
   rectangle(this.x,this.y,this.w,this.h);
 }
