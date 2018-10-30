@@ -34,6 +34,8 @@ Paddle.prototype.handleInput = function() {
   else if (keyIsDown(this.downKey)) {
     //////////////fixed removed the negative to make it so that pressing the downkey makes a difference
     this.vy = this.speed;
+  } else {
+    this.vy = 0;
   }
 }
 
