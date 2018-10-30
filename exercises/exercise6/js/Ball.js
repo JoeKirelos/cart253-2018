@@ -42,7 +42,7 @@ Ball.prototype.updated = function () {
 // Otherwise it returns false.
 Ball.prototype.isOffScreen = function () {
   // Check for going off screen and reset if so
-  //////////////fixed
+  //////////////fixed removed extra + sign
   if (this.x + this.size < 0 && this.x > width) {
     return true;
   }
@@ -63,7 +63,7 @@ Ball.prototype.display = function () {
 //
 // Check if this ball overlaps the paddle passed as an argument
 // and if so reverse x velocity to bounce
-//////////////fixed
+//////////////fixed added e to prototype and removed extra parenthesis
 Ball.prototype.handleCollision = function(paddle) {
   // Check if the ball overlaps the paddle on x axis
   if (this.x + this.size > paddle.x && this.x < paddle.x + paddle.w) {
