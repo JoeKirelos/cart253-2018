@@ -46,5 +46,6 @@ Paddle.prototype.update = function() {
 // Draw the paddle as a rectangle on the screen
 ////////////////fixed removed extra parenthesis fixed disploy to display
 Paddle.prototype.display = function() {
-  rectangle(this.x,this.y,this.w,this.h);
+  //////////////fixed rectangle to rect
+  rect(this.x,this.y,this.w,this.h);
 }
