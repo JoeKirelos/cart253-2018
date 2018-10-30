@@ -9,8 +9,9 @@
 function Paddle(x,y,w,h,speed,downKey,upKey) {
   this.x = x;
   this.y = y;
-  this.xv = 0;
-  this.yv = 0;
+  ///////////////////fixed yx and yv to vx and vy
+  this.vx = 0;
+  this.vy = 0;
   this.w = w;
   this.h = h;
   /////////////////fixed speeed to speed
@@ -31,7 +32,8 @@ Paddle.prototype.handleInput = function() {
   }
   ///////////////////fixed keyDown to keyIsDown also added this. before downKey
   else if (keyIsDown(this.downKey)) {
-    this.vy = -this.speed;
+    //////////////fixed removed the negative to make it so that pressing the downkey makes a difference
+    this.vy = this.speed;
   }
 }
 
@@ -51,4 +53,5 @@ Paddle.prototype.update = function() {
 Paddle.prototype.display = function() {
   //////////////fixed rectangle to rect
   rect(this.x,this.y,this.w,this.h);
+  console.log(this.y)
 }
