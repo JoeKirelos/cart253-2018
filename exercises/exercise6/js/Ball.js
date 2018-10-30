@@ -45,7 +45,8 @@ Ball.prototype.update = function () {
 Ball.prototype.isOffScreen = function () {
   // Check for going off screen and reset if so
   //////////////fixed removed extra + sign
-  if (this.x + this.size < 0 && this.x > width) {
+  //////////////fixed removed && to || (or instead of and)
+  if (this.x + this.size < 0 || this.x > width) {
     return true;
   }
   else {
@@ -84,7 +85,8 @@ Ball.prototype.handleCollision = function(paddle) {
 // reset()
 //
 // Set position back to the middle of the screen
-Ball.prototype.rest = function () {
+////////////////fixed changed rest to reset
+Ball.prototype.reset = function () {
   this.x = width/2;
   this.y = height/2;
 }

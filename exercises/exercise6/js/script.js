@@ -52,7 +52,8 @@ function draw() {
 
 ////////////////fixed added needed curly bracket removed "the"
   if (ball.isOffScreen()){
-    reset();
+    ////////////////fixed added ball. before reset so the program knows where the function comes from
+    ball.reset();
   }
 
   ball.handleCollision(leftPaddle);
