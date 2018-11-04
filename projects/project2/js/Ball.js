@@ -14,6 +14,9 @@ function Ball(x,y,vx,vy,size,speed) {
   this.vy = vy;
   this.size = size;
   this.speed = speed;
+  //ball keep track of scores
+  this.leftScore = 0;
+  this.rightScore = 0;
 }
 
 // update()
@@ -41,9 +44,16 @@ Ball.prototype.update = function () {
 // Otherwise it returns false.
 Ball.prototype.isOffScreen = function () {
   // Check for going off screen and reset if so
-  if (this.x + this.size < 0 || this.x > width) {
-    return true;
-  }
+  // Check which size the ball left screen from and award a point to the opposite side
+    if (this.x + this.size < 0){
+      this.rightScore++;
+      console.log(this.leftScore,this.rightScore);
+      return true;
+    }if (this.x > width) {
+      this.leftScore++;
+      console.log(this.leftScore,this.rightScore);
+      return true;
+    }
   else {
     return false;
   }
