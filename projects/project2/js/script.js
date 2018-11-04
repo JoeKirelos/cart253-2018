@@ -1,5 +1,5 @@
-// Basic OO Pong
-// by Pippin Barr
+// not so basic Pong
+// by Joe K.
 //
 // A primitive implementation of Pong with no scoring system
 // just the ability to play the game with the keyboard.

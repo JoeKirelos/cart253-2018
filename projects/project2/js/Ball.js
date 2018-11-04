@@ -81,4 +81,5 @@ Ball.prototype.handleCollision = function(paddle) {
 Ball.prototype.reset = function () {
   this.x = width/2;
   this.y = height/2;
+  this.vx = -this.vx; //ball goes towards the paddle that scored the last point
 }
