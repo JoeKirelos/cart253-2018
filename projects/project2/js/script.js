@@ -14,6 +14,7 @@ var ball;
 var leftPaddle;
 var rightPaddle;
 var gameOn = false;
+var gameOver = false;
 
 // setup()
 //
@@ -36,6 +37,20 @@ function setup() {
 function draw() {
   if (gameOn === false){
     background(0);
+    fill(255);
+    textAlign(CENTER);
+    textSize(26);
+    text("Welcome to Joe's SUPER DUPER EPIC PONG", width/2, height/2-30);
+    textSize(18);
+    text("Press Space", width/2, height/2);
+  }else if (gameOver === true) {
+    background(0);
+    fill(255);
+    textAlign(CENTER);
+    textSize(26);
+    text("The Game Is Over!", width/2, height/2-30);
+    textSize(18);
+    text("Press X", width/2, height/2);
   }else{
   background(0);
   for(var i=0; i<1000; i++){
@@ -67,9 +82,11 @@ function draw() {
   rightPaddle.display();
 }
 }
-
 function keyTyped(){
   if (32){
     gameOn = true;
+  }
+  else if (88) {
+    gameOver = false;
   }
 }
