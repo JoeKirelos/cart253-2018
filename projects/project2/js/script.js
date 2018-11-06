@@ -13,6 +13,7 @@
 var ball;
 var leftPaddle;
 var rightPaddle;
+var gameOn = false;
 
 // setup()
 //
@@ -33,6 +34,9 @@ function setup() {
 // Handles input, updates all the elements, checks for collisions
 // and displays everything.
 function draw() {
+  if (gameOn === false){
+    background(0);
+  }else{
   background(0);
   for(var i=0; i<1000; i++){
       fill(255);
@@ -61,4 +65,11 @@ function draw() {
   ball.display();
   leftPaddle.display();
   rightPaddle.display();
+}
+}
+
+function keyTyped(){
+  if (32){
+    gameOn = true;
+  }
 }
