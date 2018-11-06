@@ -51,5 +51,9 @@ Paddle.prototype.display = function() {
   var color = map(this.score,0,10,255,0);
   fill(255,color,color);
   rect(this.x,this.y,this.w,this.h);
-  
+  for (var i = 10*this.score; i<200; i++){
+    noStroke();
+    fill(0,0,255);
+    rect(this.x + random(10),this.y + random(60),1,1);
+  }
 }
