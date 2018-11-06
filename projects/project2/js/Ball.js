@@ -47,15 +47,15 @@ Ball.prototype.isOffScreen = function () {
   // Check which size the ball left screen from and award a point to the opposite side
     if (this.x + this.size < 0){
       this.rightScore++;
-      console.log(this.leftScore,this.rightScore);
-      return true;
+      //console.log(this.leftScore,this.rightScore);
+      return 1;
     }if (this.x > width) {
       this.leftScore++;
-      console.log(this.leftScore,this.rightScore);
-      return true;
+      //console.log(this.leftScore,this.rightScore);
+      return 2;
     }
   else {
-    return false;
+    return 0;
   }
 }
 
@@ -92,8 +92,8 @@ Ball.prototype.reset = function () {
   this.x = width/2;
   this.y = height/2;
   this.vx = -this.vx; //ball goes towards the paddle that scored the last point
-  // make the y velocity random 
+  // make the y velocity random
   this.vy = this.speed;
   this.vy = random(-1.5,1.5)*this.vy;
-  console.log(this.vy);
+  //console.log(this.vy);
 }
