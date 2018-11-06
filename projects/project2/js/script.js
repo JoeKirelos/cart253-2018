@@ -34,6 +34,11 @@ function setup() {
 // and displays everything.
 function draw() {
   background(0);
+  for(var i=0; i<1000; i++){
+      fill(255);
+      noStroke();
+      rect(random(width),random(height),1,1);
+    }
 
   leftPaddle.handleInput();
   rightPaddle.handleInput();
