@@ -13,6 +13,7 @@
 var ball;
 var leftPaddle;
 var rightPaddle;
+var enemy;
 var gameOn = false;
 var gameOver = false;
 
@@ -28,6 +29,8 @@ function setup() {
   // Create the left paddle with W and S as controls
   // Keycodes 83 and 87 are W and S respectively
   leftPaddle = new Paddle(0,height/2,10,60,10,83,87);
+  // create enemy
+  enemy = new Enemy(random(width),random(height),2,2,10,5);
 }
 
 // draw()
@@ -52,10 +55,11 @@ function draw() {
   rightPaddle.handleInput();
 
   ball.update();
+  enemy.update();
   leftPaddle.update();
   rightPaddle.update();
 
-  if (leftPaddle.score > 2 || rightPaddle.score >2 ){
+  if (leftPaddle.score > 25 || rightPaddle.score >25 ){
     gameOver=true;
   }
 
@@ -69,11 +73,15 @@ function draw() {
     //console.log(leftPaddle.score,rightPaddle.score);
     ball.reset();
   }
+  if(enemy.isOffScreen()){
+    enemy.reset();
+  }
 
   ball.handleCollision(leftPaddle);
   ball.handleCollision(rightPaddle);
 
   ball.display();
+  enemy.display();
   leftPaddle.display();
   rightPaddle.display();
 }

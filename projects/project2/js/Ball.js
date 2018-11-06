@@ -48,14 +48,14 @@ Ball.prototype.isOffScreen = function () {
     if (this.x + this.size < 0){
       this.rightScore++;
       console.log(this.leftScore,this.rightScore);
-      return '1';
+      return 1;
     }else if (this.x > width) {
       this.leftScore++;
       console.log(this.leftScore,this.rightScore);
-      return '2';
+      return 2;
     }
   else {
-    return '0';
+    return 0;
   }
 }
 
