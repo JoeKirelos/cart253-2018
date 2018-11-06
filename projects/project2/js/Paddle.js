@@ -41,8 +41,8 @@ Paddle.prototype.handleInput = function() {
 Paddle.prototype.update = function() {
   this.y += this.vy;
   this.y = constrain(this.y,0,height-this.h);
-  console.log(leftPaddle.score,rightPaddle.score)
 }
+
 
 // display()
 //

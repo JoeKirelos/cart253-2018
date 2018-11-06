@@ -35,23 +35,12 @@ function setup() {
 // Handles input, updates all the elements, checks for collisions
 // and displays everything.
 function draw() {
-  if (gameOn === false){
-    background(0);
-    fill(255);
-    textAlign(CENTER);
-    textSize(26);
-    text("Welcome to Joe's SUPER DUPER EPIC PONG", width/2, height/2-30);
-    textSize(18);
-    text("Press Space", width/2, height/2);
-  }else if (gameOver === true) {
-    background(0);
-    fill(255);
-    textAlign(CENTER);
-    textSize(26);
-    text("The Game Is Over!", width/2, height/2-30);
-    textSize(18);
-    text("Press X", width/2, height/2);
-  }else{
+  if (gameOver === true) {
+  endScreen();
+  }
+    else if (gameOn === false){
+      titleScreen();
+    }else{
   background(0);
   for(var i=0; i<1000; i++){
       fill(255);
@@ -66,11 +55,18 @@ function draw() {
   leftPaddle.update();
   rightPaddle.update();
 
-  if (ball.isOffScreen()=== 1) {
+  if (leftPaddle.score > 2 || rightPaddle.score >2 ){
+    gameOver=true;
+  }
+
+  var offScreenVal= ball.isOffScreen();
+  if (offScreenVal=== 1) {
     rightPaddle.score++;
+    //console.log(leftPaddle.score,rightPaddle.score);
     ball.reset();
-  }if (ball.isOffScreen()=== 2) {
+  }else if (offScreenVal=== 2) {
     leftPaddle.score++;
+    //console.log(leftPaddle.score,rightPaddle.score);
     ball.reset();
   }
 
@@ -82,11 +78,36 @@ function draw() {
   rightPaddle.display();
 }
 }
-function keyTyped(){
-  if (32){
+function keyPressed(){
+  if (keyCode === 32){
     gameOn = true;
   }
-  else if (88) {
+  if (keyCode === 88) {
+    console.log("x pressed")
     gameOver = false;
+    gameOn = false;
   }
+}
+
+function titleScreen (){
+  background(0);
+  fill(255);
+  textAlign(CENTER);
+  textSize(26);
+  text("Welcome to Joe's SUPER DUPER EPIC PONG", width/2, height/2-30);
+  textSize(18);
+  text("Press Space", width/2, height/2);
+  ball.leftScore = 0;
+  ball.rightScore = 0;
+  leftPaddle.score = 0;
+  rightPaddle.score =0;
+}
+function endScreen(){
+      background(0);
+      fill(255);
+      textAlign(CENTER);
+      textSize(26);
+      text("The Game Is Over!", width/2, height/2-30);
+      textSize(18);
+      text("Press X", width/2, height/2);
 }
