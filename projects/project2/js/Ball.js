@@ -92,4 +92,8 @@ Ball.prototype.reset = function () {
   this.x = width/2;
   this.y = height/2;
   this.vx = -this.vx; //ball goes towards the paddle that scored the last point
+  // make the y velocity random 
+  this.vy = this.speed;
+  this.vy = random(-1.5,1.5)*this.vy;
+  console.log(this.vy);
 }
