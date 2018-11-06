@@ -47,11 +47,11 @@ Ball.prototype.isOffScreen = function () {
   // Check which size the ball left screen from and award a point to the opposite side
     if (this.x + this.size < 0){
       this.rightScore++;
-      console.log(this.leftScore,this.rightScore);
+      //console.log(this.leftScore,this.rightScore);
       return 1;
     }else if (this.x > width) {
       this.leftScore++;
-      console.log(this.leftScore,this.rightScore);
+      //console.log(this.leftScore,this.rightScore);
       return 2;
     }
   else {

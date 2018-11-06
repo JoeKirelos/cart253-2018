@@ -34,9 +34,9 @@ Enemy.prototype.isOffScreen = function () {
 Enemy.prototype.display = function () {
   fill(255);
   rect(this.x,this.y,this.size,this.size);
-    for(var i=0; i<100; i++){
+    for(var i=0; i<50; i++){
       fill(255,0,0);
-      rect(this.x+random(10),this.y+random(10),1,1);
+      rect(this.x+random(5),this.y+random(5),1,1);
   }
 }
 Enemy.prototype.handleCollision = function(paddle) {
@@ -49,6 +49,8 @@ Enemy.prototype.handleCollision = function(paddle) {
       this.y -= this.vy;
       // Reverse x velocity to bounce
       this.vx = -this.vx;
+      paddle.score--;
+      console.log(leftPaddle.score,rightPaddle.score);
     }
   }
 }

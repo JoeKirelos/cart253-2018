@@ -30,7 +30,7 @@ function setup() {
   // Keycodes 83 and 87 are W and S respectively
   leftPaddle = new Paddle(0,height/2,10,60,10,83,87);
   // create enemy
-  enemy = new Enemy(random(width),random(height),2,2,10,5);
+  enemy = new Enemy(random(width),random(height),5,5,5,5);
 }
 
 // draw()
@@ -79,6 +79,8 @@ function draw() {
 
   ball.handleCollision(leftPaddle);
   ball.handleCollision(rightPaddle);
+  enemy.handleCollision(leftPaddle);
+  enemy.handleCollision(rightPaddle);
 
   ball.display();
   enemy.display();
