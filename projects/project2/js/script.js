@@ -7,24 +7,23 @@
 // Arrow keys control the right hand paddle, W and S control
 // the left hand paddle.
 //
-// Written with JavaScript OOP.
-
-// Variable to contain the objects representing our ball and paddles
-var ball;
+// Written with JavaScript OOP
 var leftPaddle;
 var rightPaddle;
-var enemy;
-var portal;
 var gameOn = false;
 var gameOver = false;
 var enemies = [];
+var balls = [];
+var portals = [];
 // setup()
 //
 // Creates the ball and paddles
 function setup() {
   createCanvas(640,480);
   // Create a ball
-  ball = new Ball(width/2,height/2,5,5,10,5);
+    for (var i=0; i < 3; i++){
+      balls.push(new Ball(width/2,height/2,5,5,10,5));
+    }
   // Create the right paddle with UP and DOWN as controls
   rightPaddle = new Paddle(width-10,height/2,10,60,10,DOWN_ARROW,UP_ARROW);
   // Create the left paddle with W and S as controls
@@ -33,9 +32,10 @@ function setup() {
   for (var i=0; i < 5; i++){
     enemies.push(new Enemy(random(width),random(height),5,5,5,5));
   }
-
   //create portal at around the center of the screen
-  portal = new Portal(random(width/2)+width/4,random(height),50,100,5);
+    for (var i=0; i < 2; i++){
+      portals.push(new Portal(random(width/2)+width/4,random(height),50,100,5));
+}
 }
 
 // draw()
@@ -56,12 +56,14 @@ function draw() {
       rect(random(width),random(height),1,1);
     }
 
-
   leftPaddle.handleInput();
   rightPaddle.handleInput();
-
-  portal.update();
-  ball.update();
+  for(var i=0; i < balls.length; i++){
+  balls[i].update();
+  }
+  for (var i=0; i < portals.length; i++){
+  portals[i].update();
+  }
   for(var i=0; i < enemies.length; i++){
   enemies[i].update();
   }
@@ -72,38 +74,50 @@ function draw() {
   if (leftPaddle.score > 25 || rightPaddle.score >25 ){
     gameOver=true;
   }
-
-  var offScreenVal= ball.isOffScreen();
-  if (offScreenVal=== 1) {
-    rightPaddle.score++;
-    //console.log(leftPaddle.score,rightPaddle.score);
-    ball.reset();
-  }else if (offScreenVal=== 2) {
-    leftPaddle.score++;
-    //console.log(leftPaddle.score,rightPaddle.score);
-    ball.reset();
+  for(var i=0; i < balls.length; i++){
+    var offScreenVal= balls[i].isOffScreen();
+    if (offScreenVal=== 1) {
+      rightPaddle.score++;
+      //console.log(leftPaddle.score,rightPaddle.score);
+      balls[i].reset();
+    }else if (offScreenVal=== 2) {
+      leftPaddle.score++;
+      //console.log(leftPaddle.score,rightPaddle.score);
+      balls[i].reset();
+    }
   }
+
+
   for(var i=0; i < enemies.length; i++){
     if(enemies[i].isOffScreen()){
       enemies[i].reset();
   }
   }
 
-  portal.teleportation(ball);
-  ball.handleCollision(leftPaddle);
-  ball.handleCollision(rightPaddle);
+  for (var i=0; i < portals.length; i++){
+  portals[i].teleportation(balls[i]);
+  }
+  for(var i=0; i < balls.length; i++){
+  balls[i].handleCollision(leftPaddle);
+  balls[i].handleCollision(rightPaddle);
+  }
 
   for(var i=0; i < enemies.length; i++){
     enemies[i].handleCollision(leftPaddle);
     enemies[i].handleCollision(rightPaddle);
   }
-  ball.display();
+  for(var i=0; i < balls.length; i++){
+    balls[i].display();
+  }
+
   for(var i=0; i < enemies.length; i++){
     enemies[i].display();
   }
   leftPaddle.display();
   rightPaddle.display();
-  portal.display();
+  for (var i=0; i < portals.length; i++){
+  portals[i].display();
+  }
 }
 }
 function keyPressed(){
@@ -125,8 +139,10 @@ function titleScreen (){
   text("Welcome to Joe's SUPER DUPER EPIC PONG", width/2, height/2-30);
   textSize(18);
   text("Press Space", width/2, height/2);
-  ball.leftScore = 0;
-  ball.rightScore = 0;
+  for(var i=0; i<balls.length; i++){
+  balls[i].leftScore = 0;
+  balls[i].rightScore = 0;
+ }
   leftPaddle.score = 0;
   rightPaddle.score =0;
 }
