@@ -34,10 +34,13 @@ Enemy.prototype.isOffScreen = function () {
 Enemy.prototype.display = function () {
   fill(255);
   rect(this.x,this.y,this.size,this.size);
-    for(var i=0; i<50; i++){
+    for(var i=0; i<20; i++){
       fill(255,0,0);
       rect(this.x+random(5),this.y+random(5),1,1);
-  }
+  }    for(var i=0; i<10; i++){
+        fill(0,0,255);
+        rect(this.x+random(5),this.y+random(5),1,1);
+    }
 }
 Enemy.prototype.handleCollision = function(paddle) {
   // Check if the ball overlaps the paddle on x axis
@@ -50,6 +53,7 @@ Enemy.prototype.handleCollision = function(paddle) {
       // Reverse x velocity to bounce
       this.vx = -this.vx;
       paddle.score--;
+      paddle.score = constrain(paddle.score,-20,25);
       console.log(leftPaddle.score,rightPaddle.score);
     }
   }
@@ -60,8 +64,8 @@ Enemy.prototype.handleCollision = function(paddle) {
 Enemy.prototype.reset = function () {
   this.x = random(width);
   this.y = random(height);
-  this.vx = -this.vx; //ball goes towards the paddle that scored the last point
+  this.vx = -this.vx; //enemy goes towards the paddle that dodged it last
   // make the y velocity random
   this.vy = this.speed;
-  this.vy = random(-1.5,1.5)*this.vy;
+  this.vy = random(-2,2)*this.vy;
 }
