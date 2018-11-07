@@ -47,6 +47,8 @@ Enemy.prototype.handleCollision = function(paddle) {
   if (this.x + this.size > paddle.x && this.x < paddle.x + paddle.w) {
     // Check if the ball overlaps the paddle on y axis
     if (this.y + this.size > paddle.y && this.y < paddle.y + paddle.h) {
+      beep2.currentTime = 19.5;
+      beep2.play();
       // If so, move enemy back to previous position (by subtracting current velocity)
       this.x -= this.vx;
       this.y -= this.vy;

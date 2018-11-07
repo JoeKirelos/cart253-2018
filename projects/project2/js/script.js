@@ -15,6 +15,17 @@ var gameOver = false;
 var enemies = [];
 var balls = [];
 var portals = [];
+var beep;
+var static;
+var suction;
+var beep2;
+
+function preload(){
+  beep = new Audio('assets/sounds/beep.wav');
+  static = new Audio('assets/sounds/static.wav');
+  suction = new Audio('assets/sounds/suction.mp3');
+  beep2 = new Audio('assets/sounds/beep2.mp3')
+}
 // setup()
 //
 // Creates the ball and paddles
@@ -45,48 +56,49 @@ function setup() {
 function draw() {
   if (gameOver === true) {
   endScreen();
+  static.pause();
   }
     else if (gameOn === false){
       titleScreen();
     }else{
-  background(0);
-  for(var i=0; i<1000; i++){
-      fill(255);
-      noStroke();
-      rect(random(width),random(height),1,1);
-    }
+      static.play();
+      background(0);
+      for(var i=0; i<1000; i++){
+          fill(255);
+          noStroke();
+          rect(random(width),random(height),1,1);
+        }
 
-  leftPaddle.handleInput();
-  rightPaddle.handleInput();
-  for(var i=0; i < balls.length; i++){
-  balls[i].update();
-  }
-  for (var i=0; i < portals.length; i++){
-  portals[i].update();
-  }
-  for(var i=0; i < enemies.length; i++){
-  enemies[i].update();
-  }
-  leftPaddle.update();
-  rightPaddle.update();
+      leftPaddle.handleInput();
+      rightPaddle.handleInput();
+      for(var i=0; i < balls.length; i++){
+      balls[i].update();
+      }
+      for (var i=0; i < portals.length; i++){
+      portals[i].update();
+      }
+      for(var i=0; i < enemies.length; i++){
+      enemies[i].update();
+      }
+      leftPaddle.update();
+      rightPaddle.update();
 
 
-  if (leftPaddle.score > 25 || rightPaddle.score >25 ){
-    gameOver=true;
-  }
-  for(var i=0; i < balls.length; i++){
-    var offScreenVal= balls[i].isOffScreen();
-    if (offScreenVal=== 1) {
-      rightPaddle.score++;
-      //console.log(leftPaddle.score,rightPaddle.score);
-      balls[i].reset();
-    }else if (offScreenVal=== 2) {
-      leftPaddle.score++;
-      //console.log(leftPaddle.score,rightPaddle.score);
-      balls[i].reset();
-    }
-  }
-
+      if (leftPaddle.score > 25 || rightPaddle.score >25 ){
+        gameOver=true;
+      }
+      for(var i=0; i < balls.length; i++){
+        var offScreenVal= balls[i].isOffScreen();
+        if (offScreenVal=== 1) {
+          rightPaddle.score++;
+          //console.log(leftPaddle.score,rightPaddle.score);
+          balls[i].reset();
+        }else if (offScreenVal=== 2) {
+          leftPaddle.score++;
+          //console.log(leftPaddle.score,rightPaddle.score);
+          balls[i].reset();
+        }
+      }
 
   for(var i=0; i < enemies.length; i++){
     if(enemies[i].isOffScreen()){

@@ -26,7 +26,8 @@ Portal.prototype.teleportation = function(ball) {
   if (this.x + this.width > ball.x && this.x < ball.x + ball.size) {
     // Check if the ball overlaps the portal on y axis
     if (this.y + this.height > ball.y && this.y < ball.y + ball.size) {
-      console.log("touched")
+      suction.currentTime = 3.2;
+      suction.play();
       ball.x = random(width);
       ball.y = random(height);
       var t=random();
