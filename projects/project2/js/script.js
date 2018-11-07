@@ -17,7 +17,7 @@ var enemy;
 var portal;
 var gameOn = false;
 var gameOver = false;
-
+var enemies = [];
 // setup()
 //
 // Creates the ball and paddles
@@ -30,8 +30,10 @@ function setup() {
   // Create the left paddle with W and S as controls
   // Keycodes 83 and 87 are W and S respectively
   leftPaddle = new Paddle(0,height/2,10,60,10,83,87);
-  // create enemy
-  enemy = new Enemy(random(width),random(height),5,5,5,5);
+  for (var i=0; i < 5; i++){
+    enemies.push(new Enemy(random(width),random(height),5,5,5,5));
+  }
+
   //create portal at around the center of the screen
   portal = new Portal(random(width/2)+width/4,random(height),50,100,5);
 }
@@ -54,12 +56,15 @@ function draw() {
       rect(random(width),random(height),1,1);
     }
 
+
   leftPaddle.handleInput();
   rightPaddle.handleInput();
 
   portal.update();
   ball.update();
-  enemy.update();
+  for(var i=0; i < enemies.length; i++){
+  enemies[i].update();
+  }
   leftPaddle.update();
   rightPaddle.update();
 
@@ -78,18 +83,24 @@ function draw() {
     //console.log(leftPaddle.score,rightPaddle.score);
     ball.reset();
   }
-  if(enemy.isOffScreen()){
-    enemy.reset();
+  for(var i=0; i < enemies.length; i++){
+    if(enemies[i].isOffScreen()){
+      enemies[i].reset();
   }
-  
+  }
+
   portal.teleportation(ball);
   ball.handleCollision(leftPaddle);
   ball.handleCollision(rightPaddle);
-  enemy.handleCollision(leftPaddle);
-  enemy.handleCollision(rightPaddle);
 
+  for(var i=0; i < enemies.length; i++){
+    enemies[i].handleCollision(leftPaddle);
+    enemies[i].handleCollision(rightPaddle);
+  }
   ball.display();
-  enemy.display();
+  for(var i=0; i < enemies.length; i++){
+    enemies[i].display();
+  }
   leftPaddle.display();
   rightPaddle.display();
   portal.display();
