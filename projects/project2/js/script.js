@@ -14,6 +14,7 @@ var ball;
 var leftPaddle;
 var rightPaddle;
 var enemy;
+var portal;
 var gameOn = false;
 var gameOver = false;
 
@@ -31,6 +32,8 @@ function setup() {
   leftPaddle = new Paddle(0,height/2,10,60,10,83,87);
   // create enemy
   enemy = new Enemy(random(width),random(height),5,5,5,5);
+  //create portal at around the center of the screen
+  portal = new Portal(random(width/2)+width/4,random(height),50,100,5);
 }
 
 // draw()
@@ -54,10 +57,12 @@ function draw() {
   leftPaddle.handleInput();
   rightPaddle.handleInput();
 
+  portal.update();
   ball.update();
   enemy.update();
   leftPaddle.update();
   rightPaddle.update();
+
 
   if (leftPaddle.score > 25 || rightPaddle.score >25 ){
     gameOver=true;
@@ -76,7 +81,8 @@ function draw() {
   if(enemy.isOffScreen()){
     enemy.reset();
   }
-
+  
+  portal.teleportation(ball);
   ball.handleCollision(leftPaddle);
   ball.handleCollision(rightPaddle);
   enemy.handleCollision(leftPaddle);
@@ -86,6 +92,7 @@ function draw() {
   enemy.display();
   leftPaddle.display();
   rightPaddle.display();
+  portal.display();
 }
 }
 function keyPressed(){

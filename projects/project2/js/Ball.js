@@ -90,7 +90,6 @@ Ball.prototype.handleCollision = function(paddle) {
     }
   }
 }
-
 // reset()
 //
 // Set position back to the middle of the screen
