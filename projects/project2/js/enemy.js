@@ -1,3 +1,12 @@
+// Enemey
+//
+// A class to define how an enemy behaves. Including bouncing on the top
+// and bottom edges of the canvas, going off the left and right sides,
+// and bouncing off paddles decreasing their scores
+
+// enemey constructor
+//
+// Sets the properties with the provided arguments
 function Enemy(x,y,vx,vy,size,speed) {
   this.x = x;
   this.y = y;
@@ -30,7 +39,8 @@ Enemy.prototype.isOffScreen = function () {
     return false;
   }
 }
-
+//show the enemy as a rectangle on screen
+// the rectangle is filled with red and blue flashing dots making it static-y and hard to see
 Enemy.prototype.display = function () {
   fill(255);
   rect(this.x,this.y,this.size,this.size);
@@ -43,9 +53,9 @@ Enemy.prototype.display = function () {
     }
 }
 Enemy.prototype.handleCollision = function(paddle) {
-  // Check if the ball overlaps the paddle on x axis
+  // Check if the enemy overlaps the paddle on x axis
   if (this.x + this.size > paddle.x && this.x < paddle.x + paddle.w) {
-    // Check if the ball overlaps the paddle on y axis
+    // Check if the enemy overlaps the paddle on y axis
     if (this.y + this.size > paddle.y && this.y < paddle.y + paddle.h) {
       beep2.currentTime = 19.5;
       beep2.play();
@@ -54,19 +64,19 @@ Enemy.prototype.handleCollision = function(paddle) {
       this.y -= this.vy;
       // Reverse x velocity to bounce
       this.vx = -this.vx;
+      //reduce the paddle's score by one
       paddle.score--;
+      //constrain the paddle score to -20 since the enemy can potentially get stuck on the paddle and keep decreasing its score
       paddle.score = constrain(paddle.score,-20,25);
-      console.log(leftPaddle.score,rightPaddle.score);
     }
   }
 }
-
-
-
+// Set position back to a random point on screen
 Enemy.prototype.reset = function () {
   this.x = random(width);
   this.y = random(height);
-  this.vx = -this.vx; //enemy goes towards the paddle that dodged it last
+  //enemy goes towards the paddle that dodged it last
+  this.vx = -this.vx;
   // make the y velocity random
   this.vy = this.speed;
   this.vy = random(-2,2)*this.vy;

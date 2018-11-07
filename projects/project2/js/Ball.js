@@ -14,7 +14,7 @@ function Ball(x,y,vx,vy,size,speed) {
   this.vy = vy;
   this.size = size;
   this.speed = speed;
-  //ball keep track of scores
+  //ball keep track of scores in a way that doesn't take into account the enemy's infulence
   this.leftScore = 0;
   this.rightScore = 0;
 }
@@ -40,18 +40,17 @@ Ball.prototype.update = function () {
 
 // isOffScreen()
 //
-// Checks if the ball has moved off the screen and, if so, returns true.
-// Otherwise it returns false.
+// Checks if the ball has moved off the screen
+//depending on which side it did it returns 1 or 2
+// Otherwise it returns 0
 Ball.prototype.isOffScreen = function () {
   // Check for going off screen and reset if so
   // Check which size the ball left screen from and award a point to the opposite side
     if (this.x + this.size < 0){
       this.rightScore++;
-      //console.log(this.leftScore,this.rightScore);
       return 1;
     }else if (this.x > width) {
       this.leftScore++;
-      //console.log(this.leftScore,this.rightScore);
       return 2;
     }
   else {
@@ -65,7 +64,9 @@ Ball.prototype.isOffScreen = function () {
 Ball.prototype.display = function () {
   fill(255);
   rect(this.x,this.y,this.size,this.size);
+  //if the ball went off screen 10 times on each side it becomes static-y
   if(this.leftScore > 10 && this.rightScore > 10){
+    //a loop drawn black dots inside the ball making it static-y camouflaging it and making the game harder
     for(var i=0; i<100; i++){
       fill(0);
       rect(this.x+random(10),this.y+random(10),1,1);
@@ -97,9 +98,9 @@ Ball.prototype.handleCollision = function(paddle) {
 Ball.prototype.reset = function () {
   this.x = width/2;
   this.y = height/2;
-  this.vx = -this.vx; //ball goes towards the paddle that scored the last point
+  //ball goes towards the paddle that scored the last point
+  this.vx = -this.vx;
   // make the y velocity random
   this.vy = this.speed;
   this.vy = random(-1.5,1.5)*this.vy;
-  //console.log(this.vy);
 }
