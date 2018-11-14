@@ -4,6 +4,9 @@
 // doesn't track score for now
 // doesn't have music for now
 //is very easy for now as the player can hold the button down <.<
+// the idea will be that  an entity communicates with the player through the game to simulate the different hurdles of getting into
+//a specific or niche subculte, in this case rhythm games, i plan to highlight
+//entery barrier, initiation, elitism and finally the fun of the challenge.
 
 //coded in javascript OOP using p5 library
 
