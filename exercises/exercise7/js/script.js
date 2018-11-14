@@ -7,6 +7,8 @@
 // the idea will be that  an entity communicates with the player through the game to simulate the different hurdles of getting into
 //a specific or niche subculte, in this case rhythm games, i plan to highlight
 //entery barrier, initiation, elitism and finally the fun of the challenge.
+//for now this is the primitive barebones, the arrows and the notes and detetection of the overlapping
+//i plan to improve by adding sounds a menu and the communication of the entity
 
 //coded in javascript OOP using p5 library
 
