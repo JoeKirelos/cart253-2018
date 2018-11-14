@@ -83,8 +83,3 @@ function arrowDisplay(){
     arrows[i].display();
   }
 }
-function keyIsDown(){
-  if (keyCode === 38){
-    upKey = true;
-  }
-}
