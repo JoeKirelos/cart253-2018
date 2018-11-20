@@ -1,9 +1,4 @@
-var arrow;
-var note;
-
-function setup() {
-  createCanvas(600,600);
-}
-function draw(){
+function setup(){
+  createCanvas(windowWidth/2,windowHeight*2/3);
   background(0);
 }
