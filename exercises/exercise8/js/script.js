@@ -17,13 +17,14 @@ var j=0;
 var k=0;
 var l=0;
 var toType;
-
+var beep;
 // preload()
 //
 // a function that loads needed items before the program runs in this case a font
 // Press start 2P is the name of the font
 function preload(){
-  font = loadFont("../assets/fonts/press.ttf")
+  font = loadFont("../assets/fonts/press.ttf");
+  beep = loadSound('assets/sounds/beep.wav')
 }
 
 //setup()
@@ -44,6 +45,7 @@ function draw(){
   background(0);
 // load the type function once per frame
   type();
+
 }
 //type()
 //
@@ -70,7 +72,8 @@ function typer(){
   if(i <= typed.length){
     var type2 = typed.substring(0,i);
     toType = type2;
-    setTimeout('typer()',200);
+    setTimeout('typer()',100);
+    setTimeout('sound()',100);
     i++;
   }else {
     // once the message in the variable typed is over set an 800 miliseconds delay before
@@ -88,7 +91,8 @@ function typerTwo(){
   if (j <= typedTwo.length){
    var type2 = typedTwo.substring(0,j);
    toType = type2;
-   setTimeout('typerTwo()',200);
+   setTimeout('typerTwo()',100);
+   setTimeout('sound()',100);
    j++;
 }else {
   setTimeout('typerThree()',800);
@@ -98,7 +102,8 @@ function typerThree(){
   if (k <= typedThree.length){
    var type2 = typedThree.substring(0,k);
    toType = type2;
-   setTimeout('typerThree()',200);
+   setTimeout('typerThree()',100);
+   setTimeout('sound()',100);
    k++;
 } else { setTimeout('typerFour()',800);
 }
@@ -107,7 +112,12 @@ function typerFour(){
   if (l <= typedFour.length){
     var type2 = typedFour.substring(0,l);
     toType = type2;
-    setTimeout('typerFour()',200);
+    setTimeout('typerFour()',100);
+    setTimeout('sound()',100);
     l++;
   }
+}
+function sound(){
+  beep.play();
+  setLoop(false);
 }
