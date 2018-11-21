@@ -72,8 +72,19 @@ function typer(){
   if(i <= typed.length){
     var type2 = typed.substring(0,i);
     toType = type2;
+    //run the beep once every tenth of a second which is the same time the text updates at,
+    //creating a false feeling of text beeping as it appears
+    //check if the last character typed is a space, if it is add a 50 miliseconds delay before next letter and sound
+    //creates a pause in speech
+    if(toType.substring(i-1,i) === " "){
+      console.log("spaced")
+      setTimeout('typer()',150);
+      setTimeout('sound()',150);
+    }else{
+      console.log(toType.substring(i-1,i))
     setTimeout('typer()',100);
     setTimeout('sound()',100);
+  }
     i++;
   }else {
     // once the message in the variable typed is over set an 800 miliseconds delay before
@@ -91,8 +102,13 @@ function typerTwo(){
   if (j <= typedTwo.length){
    var type2 = typedTwo.substring(0,j);
    toType = type2;
+   if(toType.substring(j-1,j)===" "){
+     setTimeout('typerTwo()',150);
+     setTimeout('sound()',150);
+   }else{
    setTimeout('typerTwo()',100);
    setTimeout('sound()',100);
+ }
    j++;
 }else {
   setTimeout('typerThree()',800);
@@ -102,8 +118,13 @@ function typerThree(){
   if (k <= typedThree.length){
    var type2 = typedThree.substring(0,k);
    toType = type2;
+   if(toType.substring(k-1,k) === " "){
+     setTimeout('typerThree()',150);
+     setTimeout('sound()',150);
+   }else{
    setTimeout('typerThree()',100);
    setTimeout('sound()',100);
+ }
    k++;
 } else { setTimeout('typerFour()',800);
 }
@@ -112,12 +133,19 @@ function typerFour(){
   if (l <= typedFour.length){
     var type2 = typedFour.substring(0,l);
     toType = type2;
+    if(toType.substring(l-1,l) === " "){
+      setTimeout('typerFour()',150);
+      setTimeout('sound()',150);
+    }else{
     setTimeout('typerFour()',100);
     setTimeout('sound()',100);
+  }
     l++;
   }
 }
+//sound()
+//
+//handles the beep's existence
 function sound(){
   beep.play();
-  setLoop(false);
 }
