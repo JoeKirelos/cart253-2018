@@ -5,7 +5,7 @@
 //handles their x and y position, their size and their orientation
 //sets a property to hold their images
 //handles the color values of their tint
-function Note(x,y,size,vy,orientation,icon,colorR,colorG,colorB){
+function Note(x,y,size,vy,orientation,icon,colorR,colorG,colorB,lane){
   this.x = x;
   this.y = y;
   this.size = size;
@@ -15,6 +15,7 @@ function Note(x,y,size,vy,orientation,icon,colorR,colorG,colorB){
   this.colorR = colorR;
   this.colorG = colorG;
   this.colorB = colorB;
+  this.lane = lane;
 }
 //its update method
 // update its position by its y velocity
@@ -40,7 +41,7 @@ Note.prototype.display = function(){
  Note.prototype.handleScore = function(){
    // check the y position of this note and check if it overlaps with each of the arrows y positions within a 50 pixel margin
    for (var i=0; i<arrows.length; i++){
-  if (this.y < arrows[i].y+25 && this.y > arrows[i].y-25){
+  if (this.y < arrows[i].y+15 && this.y > arrows[i].y-15){
     //return true if it works
   return true;
 }

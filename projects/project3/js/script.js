@@ -17,8 +17,7 @@
 var orientations = [];
 var arrows = [];
 var icon;
-var notes = [[],[],[],[]];
-var upKey = false;
+var notes = [];
 
 
 // preload()
@@ -63,64 +62,36 @@ function draw(){
 //even on the p5.js reference for keyPressed the RIGHT_ARROW and LEFT_ARROW don't work as intended)
 function noteUpdate(){
   for (var i = 0; i < notes.length; i++) {
-  for (var j = 0; j < notes[i].length; j++) {
-    notes[i][j].update();
-    notes[i][j].display();
-  if  (notes[i][j].offScreen()){
-      notes[i].shift(-1);
-    }
-    else if (notes[i][j].handleScore()){
-      if (i===2){
-        if (keyIsPressed){
-          if(keyCode === UP_ARROW){
-          notes[i][j].colorR=255;
-        }
-        }
-      }if (i===3){
-        if (keyIsPressed){
-          if(keyCode === LEFT_ARROW){
-          notes[i][j].colorR=255;
-        }
-        }
-      }if (i===0){
-        if (keyIsPressed){
-          if(keyCode === RIGHT_ARROW){
-          notes[i][j].colorR=255;
-        }
-        }
-      }if (i===1){
-        if (keyIsPressed){
-          if(keyCode === DOWN_ARROW){
-          notes[i][j].colorR=255;
-        }
-        }
-      }
-    }
-    }
+    notes[i].update();
+    notes[i].display();
+  if  (notes[i].offScreen()){
+      notes.shift();
   }
+ }
 }
 
 //noteSpawn()
 //
 //chooses a random value and depending on the result choose one of the lanes to spawn the note on
 function noteSpawn(){
+  console.log("noteSpawning")
   //var to choose a random orientation
   var orientation = floor(random(4));
   if (orientation === 0){
     //push a new note into their respective array in this case the right one
-    notes[orientation].push(new Note(600,height+75,75,-5,orientations[orientation],icon,0,255,0,0));
+    notes.push(new Note(600,height+75,75,-5,orientations[orientation],icon,0,255,0,0));
   }
   // the down one here
   if (orientation === 1){
-    notes[orientation].push(new Note(450,height+75,75,-5,orientations[orientation],icon,0,255,0,1));
+    notes.push(new Note(450,height+75,75,-5,orientations[orientation],icon,0,255,0,1));
   }
   // the up one
   if (orientation === 2){
-    notes[orientation].push(new Note(300,height+75,75,-5,orientations[orientation],icon,0,255,0,2));
+    notes.push(new Note(300,height+75,75,-5,orientations[orientation],icon,0,255,0,2));
   }
   //and the left one
   if (orientation === 3){
-    notes[orientation].push(new Note(150,height+75,75,-5,orientations[orientation],icon,0,255,0,3));
+    notes.push(new Note(150,height+75,75,-5,orientations[orientation],icon,0,255,0,3));
   }
 }
 //arrowDisplay()
@@ -129,5 +100,28 @@ function noteSpawn(){
 function arrowDisplay(){
   for (var i =0 ; i < arrows.length; i++) {
     arrows[i].display();
+  }
+}
+
+function keyPressed(){
+  if (keyCode ===LEFT_ARROW){
+    if(notes[0].lane===3&&notes[0].handleScore()){
+        notes[0].colorR = 255;
+    }
+  }
+  if (keyCode ===RIGHT_ARROW){
+    if(notes[0].lane===0&&notes[0].handleScore()){
+        notes[0].colorR = 255;
+    }
+  }
+  if (keyCode ===UP_ARROW){
+    if(notes[0].lane===2&&notes[0].handleScore()){
+        notes[0].colorR = 255;
+    }
+  }
+  if (keyCode ===DOWN_ARROW){
+    if(notes[0].lane===1&&notes[0].handleScore()){
+        notes[0].colorR = 255;
+    }
   }
 }
