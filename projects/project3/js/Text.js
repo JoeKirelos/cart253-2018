@@ -1,0 +1,30 @@
+function Generator(tToType,tTyped,tOut1,tOut2){
+  this.tToType = tToType;
+  this.tTyped = tTyped;
+  this.tOut1 = tOut1;
+  this.tOut2 = tOut2;
+  this.index = 0;
+}
+
+Generator.prototype.generate = function(){
+  console.log(this.tTyped)
+  if (this.index<=this.tTyped.length){
+    var type = this.tTyped.substring(0,this.index);
+  this.tToType = type;
+  if (this.tToType.substring(this.index-1,this.index)===' '){
+    setTimeout(this.generate.bind(this),this.tOut1);
+
+  }else {
+    setTimeout(this.generate.bind(this),this.tOut2);
+  }
+  this.index++
+}else{
+  return false;
+}
+}
+
+Generator.prototype.display = function(){
+  fill(255);
+  textSize(42);
+  text(this.tToType,50, height/3,width-25);
+}

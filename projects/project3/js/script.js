@@ -18,6 +18,8 @@ var orientations = [];
 var arrows = [];
 var icon;
 var notes = [];
+var textIntial = true;
+var generator;
 
 
 // preload()
@@ -35,10 +37,15 @@ function preload(){
 function setup(){
   createCanvas(800,600);
   orientations = [0,PI/2,3*PI/2,PI];
+  generator = new Generator("","Hi there, my name is Connor",150,100);
+  if(textIntial === true){
+    generator.generate();
+  }else{
   for (var i = 0; i<4; i++){
   arrows.push(new Arrow(600-i*150,75,100,orientations[i],icon,255,0,0));
 }
-setInterval(noteSpawn,2000)
+setInterval(noteSpawn,2000);
+}
 }
 
 
@@ -47,8 +54,12 @@ setInterval(noteSpawn,2000)
 // draws the background displays all the objects
 function draw(){
   background(0);
+  if(textIntial === true){
+  generator.display();
+}else{
   arrowDisplay();
   noteUpdate();
+}
 }
 
 
