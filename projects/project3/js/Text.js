@@ -7,7 +7,6 @@ function Generator(tToType,tTyped,tOut1,tOut2){
 }
 
 Generator.prototype.generate = function(){
-  console.log(this.tTyped)
   if (this.index<=this.tTyped.length){
     var type = this.tTyped.substring(0,this.index);
   this.tToType = type;
@@ -18,10 +17,9 @@ Generator.prototype.generate = function(){
     setTimeout(this.generate.bind(this),this.tOut2);
   }
   this.index++
-}else{
-  return false;
 }
 }
+
 
 Generator.prototype.display = function(){
   fill(255);

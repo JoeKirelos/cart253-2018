@@ -20,6 +20,7 @@ var icon;
 var notes = [];
 var textIntial = true;
 var generator;
+var spawnRate = 2000;
 
 
 // preload()
@@ -38,14 +39,11 @@ function setup(){
   createCanvas(800,600);
   orientations = [0,PI/2,3*PI/2,PI];
   generator = new Generator("","Hi there, my name is Connor",150,100);
-  if(textIntial === true){
-    generator.generate();
-  }else{
+  generator.generate();
   for (var i = 0; i<4; i++){
   arrows.push(new Arrow(600-i*150,75,100,orientations[i],icon,255,0,0));
 }
-setInterval(noteSpawn,2000);
-}
+    setInterval(noteSpawn,spawnRate);
 }
 
 
@@ -56,6 +54,9 @@ function draw(){
   background(0);
   if(textIntial === true){
   generator.display();
+  if (generator.index> generator.tTyped.length){
+    textIntial = false;
+  }
 }else{
   arrowDisplay();
   noteUpdate();
@@ -87,6 +88,7 @@ function noteUpdate(){
 function noteSpawn(){
   console.log("noteSpawning")
   //var to choose a random orientation
+  if(textIntial===false){
   var orientation = floor(random(4));
   if (orientation === 0){
     //push a new note into their respective array in this case the right one
@@ -104,6 +106,7 @@ function noteSpawn(){
   if (orientation === 3){
     notes.push(new Note(150,height+75,75,-5,orientations[orientation],icon,0,255,0,3));
   }
+}
 }
 //arrowDisplay()
 //
