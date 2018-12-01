@@ -54,10 +54,3 @@ Note.prototype.offScreen = function(){
     return true;
   }
 }
-Note.prototype.speedTime = function(){
-  if (this.y < arrows[i].y+15 && this.y > arrows[i].y-15){
-    console.log("hit chance")
-  }else{
-    console.log("time to make it")
-  }
-}

@@ -12,9 +12,10 @@ Generator.prototype.generate = function(){
   this.tToType = type;
   if (this.tToType.substring(this.index-1,this.index)===' '){
     setTimeout(this.generate.bind(this),this.tOut1);
-
+    beep.play();
   }else {
     setTimeout(this.generate.bind(this),this.tOut2);
+    beep.play();
   }
   this.index++
 }

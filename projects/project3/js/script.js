@@ -21,13 +21,17 @@ var notes = [];
 var textIntial = true;
 var generator;
 var spawnRate = 2000;
-
+var beep;
+var peaks = []
 
 // preload()
 //
 //preloads the images to be used later for the the objects
 function preload(){
-  icon = loadImage('assets/images/arrow.png')
+  icon = loadImage('assets/images/arrow.png');
+  font = loadFont("../assets/fonts/press.ttf");
+  beep = loadSound('assets/sounds/beep.wav');
+  song1 = loadSound('assets/sounds/song1.wav');
 }
 
 
@@ -43,8 +47,10 @@ function setup(){
   for (var i = 0; i<4; i++){
   arrows.push(new Arrow(600-i*150,75,100,orientations[i],icon,255,0,0));
 }
-    setInterval(noteSpawn,spawnRate);
+  song1.play(3);
+  setTimeout(noteSpawn,13850)
 }
+
 
 
 //draw()
@@ -53,6 +59,7 @@ function setup(){
 function draw(){
   background(0);
   if(textIntial === true){
+  console.log("frames");
   generator.display();
   if (generator.index> generator.tTyped.length){
     textIntial = false;
@@ -86,25 +93,31 @@ function noteUpdate(){
 //
 //chooses a random value and depending on the result choose one of the lanes to spawn the note on
 function noteSpawn(){
-  console.log("noteSpawning")
+
   //var to choose a random orientation
   if(textIntial===false){
   var orientation = floor(random(4));
+    console.log("noteSpawning")
   if (orientation === 0){
     //push a new note into their respective array in this case the right one
     notes.push(new Note(600,height+75,75,-5,orientations[orientation],icon,0,255,0,0));
+    setTimeout(noteSpawn,850)
+
   }
   // the down one here
   if (orientation === 1){
     notes.push(new Note(450,height+75,75,-5,orientations[orientation],icon,0,255,0,1));
+        setTimeout(noteSpawn,850)
   }
   // the up one
   if (orientation === 2){
     notes.push(new Note(300,height+75,75,-5,orientations[orientation],icon,0,255,0,2));
+        setTimeout(noteSpawn,850)
   }
   //and the left one
   if (orientation === 3){
     notes.push(new Note(150,height+75,75,-5,orientations[orientation],icon,0,255,0,3));
+        setTimeout(noteSpawn,850)
   }
 }
 }
@@ -138,4 +151,9 @@ function keyPressed(){
         notes[0].colorR = 255;
     }
   }
+}
+function getBPM(song1){
+}
+function songPlay(){
+  song1.play();
 }
