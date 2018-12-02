@@ -21,6 +21,8 @@ var notes = [];
 var textIntial = true;
 var generator;
 var beep;
+var spawnRate = 666;
+var noteSpeed = 5;
 
 
 // preload()
@@ -47,7 +49,7 @@ function setup(){
   arrows.push(new Arrow(600-i*150,75,100,orientations[i],icon,255,0,0));
 }
   song1.play(3);
-  setTimeout(noteSpawn,12840)
+  setTimeout(noteSpawn,3000);
 }
 
 
@@ -65,6 +67,22 @@ function draw(){
 }else{
   arrowDisplay();
   noteUpdate();
+  song1.addCue(11.00, spawnAlter, 555);
+  song1.addCue(11.00, speedAlter, 8);
+  song1.addCue(24.00, spawnAlter, 600);
+  song1.addCue(24.00, speedAlter, 6);
+  song1.addCue(35.00, spawnAlter, 750);
+  song1.addCue(35.00, speedAlter, 4);
+  song1.addCue(46.00, spawnAlter, 600);
+  song1.addCue(46.00, speedAlter, 6);
+  song1.addCue(56.00, spawnAlter, 555);
+  song1.addCue(56.00, speedAlter, 8);
+  song1.addCue(140.00, spawnAlter, 800);
+  song1.addCue(140.00, speedAlter, 4);
+  song1.addCue(161.00, spawnAlter, 600);
+  song1.addCue(161.00, speedAlter, 6);
+  song1.addCue(188.00, spawnAlter, 2000);
+  song1.addCue(188.00, speedAlter, 4);
 }
 }
 
@@ -98,21 +116,21 @@ function noteSpawn(){
     console.log("noteSpawning")
   if (orientation === 0){
     //push a new note into their respective array in this case the right one
-    notes.push(new Note(600,height+75,75,-5,orientations[orientation],icon,0,255,0,0));
+    notes.push(new Note(600,height+75,75,-noteSpeed,orientations[orientation],icon,0,255,0,0));
   }
   // the down one here
   if (orientation === 1){
-    notes.push(new Note(450,height+75,75,-5,orientations[orientation],icon,0,255,0,1));
+    notes.push(new Note(450,height+75,75,-noteSpeed,orientations[orientation],icon,0,255,0,1));
   }
   // the up one
   if (orientation === 2){
-    notes.push(new Note(300,height+75,75,-5,orientations[orientation],icon,0,255,0,2));
+    notes.push(new Note(300,height+75,75,-noteSpeed,orientations[orientation],icon,0,255,0,2));
   }
   //and the left one
   if (orientation === 3){
-    notes.push(new Note(150,height+75,75,-5,orientations[orientation],icon,0,255,0,3));
+    notes.push(new Note(150,height+75,75,-noteSpeed,orientations[orientation],icon,0,255,0,3));
   }
-    setTimeout(noteSpawn,666);
+    setTimeout(noteSpawn,spawnRate);
 }
 }
 //arrowDisplay()
@@ -126,28 +144,37 @@ function arrowDisplay(){
 
 function keyPressed(){
   if (keyCode ===LEFT_ARROW){
-    if(notes[0].lane===3&&notes[0].handleScore()){
-        notes[0].colorR = 255;
-    }
+    for(var i = 0; i<=3; i++){
+      if(notes[i].lane===3&&notes[i].handleScore()){
+          notes[i].colorR = 255;
+        }
+      }
   }
   if (keyCode ===RIGHT_ARROW){
-    if(notes[0].lane===0&&notes[0].handleScore()){
-        notes[0].colorR = 255;
-    }
+    for(var i = 0; i<=3; i++){
+      if(notes[i].lane===0&&notes[i].handleScore()){
+          notes[i].colorR = 255;
+        }
+      }
   }
   if (keyCode ===UP_ARROW){
-    if(notes[0].lane===2&&notes[0].handleScore()){
-        notes[0].colorR = 255;
-    }
+    for(var i = 0; i<=3; i++){
+      if(notes[i].lane===2&&notes[i].handleScore()){
+          notes[i].colorR = 255;
+        }
+      }
   }
   if (keyCode ===DOWN_ARROW){
-    if(notes[0].lane===1&&notes[0].handleScore()){
-        notes[0].colorR = 255;
+    for(var i = 0; i<=3; i++){
+      if(notes[i].lane===1&&notes[i].handleScore()){
+        notes[i].colorR = 255;
     }
   }
 }
-function getBPM(song1){
 }
-function songPlay(){
-  song1.play();
+function spawnAlter(val){
+  spawnRate = val
+}
+function speedAlter(val){
+  noteSpeed = val
 }

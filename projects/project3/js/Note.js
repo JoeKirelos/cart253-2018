@@ -52,7 +52,5 @@ Note.prototype.offScreen = function(){
   if (this.y<0){
     //return true if it did
     return true;
-  }else{
-    console.log("speed")
   }
 }
