@@ -23,7 +23,7 @@ var font;
 var song2;
 var spawnRate = 800;
 var noteSpeed = 5;
-var tTyped2="You did really bad there, didn't you ?  I guess this song is a little difficult. You should play something your own level. Try this one!";
+var tTyped2="You did really bad there, didn't you ?  I guess that song is a little difficult. You should play something your own level. Try this one!";
 
 
 // preload()
@@ -51,9 +51,9 @@ function setup(){
   for (var i = 0; i<4; i++){
   arrows.push(new Arrow(600-i*150,75,100,orientations[i],arrowIcon,'#aba7e2',orientations[i]));
   }
-//16 seconds is roughly the amount of time it takes for the text to finish
-  song2.play(16);
-  setTimeout(noteSpawn,16000);
+//18 seconds is roughly the amount of time it takes for the text to finish
+  song2.play(18);
+  setTimeout(noteSpawn,18000);
 }
 
 

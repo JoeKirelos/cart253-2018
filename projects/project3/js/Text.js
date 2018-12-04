@@ -30,10 +30,9 @@ Generator.prototype.generate = function(){
   // once it's over reset the tToType variable and repeat with the next message
 if (this.index <= this.firstEnd){
   var type = this.tTyped.substring(this.firstStart,this.index);
-this.tToType = type;
- if (this.tToType.substring(this.index-1,this.index)===' '){
+ this.tToType = type;
+ if (this.tTyped.substring(this.index-1,this.index)===' '){
   setTimeout(this.generate.bind(this),this.tOut1);
-  beep.play();
 }else {
   setTimeout(this.generate.bind(this),this.tOut2);
   beep.play();
@@ -42,10 +41,9 @@ this.index++;
 //next message is from substring 11 to 32
 }else if (this.index <=this.secondEnd){
   var type = this.tTyped.substring(this.firstEnd,this.index);
-this.tToType = type;
- if (this.tToType.substring(this.index-1,this.index)===' '){
+ this.tToType = type;
+ if (this.tTyped.substring(this.index-1,this.index)===' '){
   setTimeout(this.generate.bind(this),this.tOut1);
-  beep.play();
 }else {
   setTimeout(this.generate.bind(this),this.tOut2);
   beep.play();
@@ -54,10 +52,9 @@ this.index++;
 //substring 33 to 48 is the 3rd message
 }else if (this.index <=this.thirdEnd){
   var type = this.tTyped.substring(this.secondEnd,this.index);
-this.tToType = type;
- if (this.tToType.substring(this.index-1,this.index)===' '){
+ this.tToType = type;
+ if (this.tTyped.substring(this.index-1,this.index)===' '){
   setTimeout(this.generate.bind(this),this.tOut1);
-  beep.play();
 }else {
   setTimeout(this.generate.bind(this),this.tOut2);
   beep.play();
@@ -66,10 +63,9 @@ this.index++;
 //last message is 48 to 65
 }else if (this.index <=this.fourthEnd){
   var type = this.tTyped.substring(this.thirdEnd,this.index);
-this.tToType = type;
- if (this.tToType.substring(this.index-1,this.index)===' '){
+ this.tToType = type;
+ if (this.tTyped.substring(this.index-1,this.index)===' '){
   setTimeout(this.generate.bind(this),this.tOut1);
-  beep.play();
 }else {
   setTimeout(this.generate.bind(this),this.tOut2);
   beep.play();

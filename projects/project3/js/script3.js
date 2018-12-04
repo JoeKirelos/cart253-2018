@@ -19,9 +19,9 @@ var notes = [];
 var textIntial = true;
 var generator;
 var beep;
-var spawnRate = 666;
+var spawnRate = 700;
 var noteSpeed = 5;
-var tTyped1="Hi there!  Welcome to the game!  Hope you enjoy!  If you can xD  ";
+var tTyped3="Well that was better, wasn't it ? I mean if you couldn't FC that... You might aswell give up now. No way you make it to higher difficulties";
 
 
 // preload()
@@ -32,7 +32,7 @@ function preload(){
   noteIcon = loadImage('assets/images/note.png');
   font = loadFont("../assets/fonts/press.ttf");
   beep = loadSound('assets/sounds/beep.wav');
-  song1 = loadSound('assets/sounds/song1.wav');
+  song3 = loadSound('assets/sounds/song3.wav');
 }
 
 
@@ -44,14 +44,14 @@ function preload(){
 function setup(){
   createCanvas(800,600);
   orientations = [0,PI/2,3*PI/2,PI];
-  generator = new Generator("",tTyped1,200,100);
+  generator = new Generator("",tTyped3,200,100,0,34,68,97,139);
   generator.generate();
   for (var i = 0; i<4; i++){
   arrows.push(new Arrow(600-i*150,75,100,orientations[i],arrowIcon,'#aba7e2',orientations[i]));
   }
-//10 seconds is roughly the amount of time it takes for the text to finish
-  song1.play(10);
-  setTimeout(noteSpawn,10000);
+//18 seconds is roughly the amount of time it takes for the text to finish
+  song3.play(18);
+  setTimeout(noteSpawn,18000);
 }
 
 
@@ -212,28 +212,26 @@ function speedAlter(val){
 //adds cues to the song, based on the speed at which the song is going, it alters the spawnRate and noteSpeed
 function cues(){
 
-  song1.addCue(11.00, spawnAlter, 555);
-  song1.addCue(11.00, speedAlter, 8);
-  song1.addCue(24.00, spawnAlter, 600);
-  song1.addCue(24.00, speedAlter, 6);
-  song1.addCue(35.00, spawnAlter, 750);
-  song1.addCue(35.00, speedAlter, 4);
-  song1.addCue(46.00, spawnAlter, 600);
-  song1.addCue(46.00, speedAlter, 6);
-  song1.addCue(56.00, spawnAlter, 555);
-  song1.addCue(56.00, speedAlter, 8);
-  song1.addCue(140.00, spawnAlter, 800);
-  song1.addCue(140.00, speedAlter, 4);
-  song1.addCue(161.00, spawnAlter, 600);
-  song1.addCue(161.00, speedAlter, 6);
-  song1.addCue(188.00, spawnAlter, 2000);
-  song1.addCue(188.00, speedAlter, 4);
-  song1.addCue(192.00, spawnAlter, 20000);
-  song1.addCue(192.00, nextLevel);
+  song3.addCue(12.00, spawnAlter, 800);
+  song3.addCue(12.00, speedAlter, 4);
+  song3.addCue(22.00, spawnAlter, 500);
+  song3.addCue(22.00, speedAlter, 6);
+  song3.addCue(24.00, spawnAlter, 800);
+  song3.addCue(24.00, speedAlter, 5);
+  song3.addCue(36.00, spawnAlter, 1000);
+  song3.addCue(36.00, speedAlter, 4);
+  song3.addCue(40.00, spawnAlter, 700);
+  song3.addCue(40.00, speedAlter, 5);
+  song3.addCue(40.00, spawnAlter, 1000);
+  song3.addCue(40.00, speedAlter, 4);
+  song3.addCue(56.00, spawnAlter, 700);
+  song3.addCue(56.00, speedAlter, 6);
+  song3.addCue(86.00, spawnAlter, 20000);
+  song3.addCue(89.00, nextLevel);
 }
 //nextLevel()
 //
 //make the button for next level appear
 function nextLevel(){
- document.getElementById('nextLevel').style.opacity = 1;
+ document.getElementById('nextLevel3').style.opacity = 1;
 }
