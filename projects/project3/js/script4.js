@@ -16,13 +16,13 @@ var generator;
 var beep;
 var tTyped4="I didn't expect you to stick around. I guess you got the point, didn't you ? No matter what others say or how they bring you down. If you enjoy something keep doing it.  ";
 var textIntial = true;
-
+var myFont;
 // preload()
 //
 //preloads the images, sounds and fonts to be used later for the the objects
 function preload(){
-  font = loadFont("../assets/fonts/pin.otf");
-  beep = loadSound('assets/sounds/beep.wav');
+  myFont = loadFont("../assets/fonts/pin.otf");
+  beep = loadSound('../assets/sounds/beep.wav');
 }
 
 

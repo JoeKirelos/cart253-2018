@@ -20,7 +20,7 @@ var textIntial = true;
 var generator;
 var beep;
 var song1;
-var font;
+var myFont;
 var spawnRate = 666;
 var noteSpeed = 5;
 var tTyped1="Hi there!  Welcome to the game!  Hope you enjoy!  If you can xD  ";
@@ -30,11 +30,11 @@ var tTyped1="Hi there!  Welcome to the game!  Hope you enjoy!  If you can xD  ";
 //
 //preloads the images, sounds and fonts to be used later for the the objects
 function preload(){
-  arrowIcon = loadImage('assets/images/arrow.png');
-  noteIcon = loadImage('assets/images/note.png');
+  arrowIcon = loadImage('../assets/images/arrow.png');
+  noteIcon = loadImage('../assets/images/note.png');
   font = loadFont("../assets/fonts/pin.otf");
-  beep = loadSound('assets/sounds/beep.wav');
-  song1 = loadSound('assets/sounds/song1.wav');
+  beep = loadSound('../assets/sounds/beep.wav');
+  song1 = loadSound('../assets/sounds/song1.wav');
 }
 
 

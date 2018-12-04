@@ -19,7 +19,7 @@ var notes = [];
 var textIntial = true;
 var generator;
 var beep;
-var font;
+var myFont;
 var song2;
 var spawnRate = 800;
 var noteSpeed = 5;
@@ -30,11 +30,11 @@ var tTyped2="You did really bad there, didn't you ?  I guess that song is a litt
 //
 //preloads the images, sounds and fonts to be used later for the the objects
 function preload(){
-  arrowIcon = loadImage('assets/images/arrow.png');
-  noteIcon = loadImage('assets/images/note.png');
+  arrowIcon = loadImage('../assets/images/arrow.png');
+  noteIcon = loadImage('../assets/images/note.png');
   font = loadFont("../assets/fonts/pin.otf");
-  beep = loadSound('assets/sounds/beep.wav');
-  song2 = loadSound('assets/sounds/song2.wav');
+  beep = loadSound('../assets/sounds/beep.wav');
+  song2 = loadSound('../assets/sounds/song2.wav');
 }
 
 

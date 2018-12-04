@@ -22,17 +22,17 @@ var beep;
 var spawnRate = 700;
 var noteSpeed = 5;
 var tTyped3="Well that was better, wasn't it ? I mean if you couldn't FC that... You might aswell give up now. No way you make it to higher difficulties";
-
+var myFont;
 
 // preload()
 //
 //preloads the images, sounds and fonts to be used later for the the objects
 function preload(){
-  arrowIcon = loadImage('assets/images/arrow.png');
-  noteIcon = loadImage('assets/images/note.png');
-  font = loadFont("../assets/fonts/pin.otf");
-  beep = loadSound('assets/sounds/beep.wav');
-  song3 = loadSound('assets/sounds/song3.wav');
+  arrowIcon = loadImage('../assets/images/arrow.png');
+  noteIcon = loadImage('../assets/images/note.png');
+  myFont = loadFont("../assets/fonts/pin.otf");
+  beep = loadSound('../assets/sounds/beep.wav');
+  song3 = loadSound('../assets/sounds/song3.wav');
 }
 
 
