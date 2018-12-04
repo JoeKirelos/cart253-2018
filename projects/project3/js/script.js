@@ -19,6 +19,8 @@ var notes = [];
 var textIntial = true;
 var generator;
 var beep;
+var song1;
+var font;
 var spawnRate = 666;
 var noteSpeed = 5;
 var tTyped1="Hi there!  Welcome to the game!  Hope you enjoy!  If you can xD  ";
@@ -44,7 +46,8 @@ function preload(){
 function setup(){
   createCanvas(800,600);
   orientations = [0,PI/2,3*PI/2,PI];
-  generator = new Generator("",tTyped1,200,100);
+  //generator takes the string that should be typed, the time outs, and length of messages and displays it all letter by letter
+  generator = new Generator("",tTyped1,200,100,0,11,32,50,65);
   generator.generate();
   for (var i = 0; i<4; i++){
   arrows.push(new Arrow(600-i*150,75,100,orientations[i],arrowIcon,'#aba7e2',orientations[i]));
@@ -141,28 +144,28 @@ function keyPressed(){
     for(var i = 0; i<=3; i++){
       if(notes[i].lane===3&&notes[i].handleScore()){
           notes[i].hexColor ='#00000000';
-        }
+         }
       }
   }
   if (keyCode ===RIGHT_ARROW){
     for(var i = 0; i<=3; i++){
-      if(notes[i].lane===0&&notes[i].handleScore()){
-          notes[i].hexColor ='#00000000';
+      if(notes[0].lane===0&&notes[i].handleScore()){
+          notes[0].hexColor ='#00000000';
         }
       }
     }
   if (keyCode ===UP_ARROW){
     for(var i = 0; i<=3; i++){
-      if(notes[i].lane===2&&notes[i].handleScore()){
-          notes[i].hexColor = '#00000000';
+      if(notes[0].lane===2&&notes[i].handleScore()){
+          notes[0].hexColor = '#00000000';
         }
       }
   }
   if (keyCode ===DOWN_ARROW){
     for(var i = 0; i<=3; i++){
-      if(notes[i].lane===1&&notes[i].handleScore()){
-        notes[i].hexColor = '#00000000';
-    }
+      if(notes[0].lane===1&&notes[i].handleScore()){
+        notes[0].hexColor = '#00000000';
+     }
   }
 }
 }
@@ -231,6 +234,9 @@ function cues(){
   song1.addCue(192.00, spawnAlter, 20000);
   song1.addCue(192.00, nextLevel);
 }
+//nextLevel()
+//
+//make the button for next level appear
 function nextLevel(){
  document.getElementById('nextLevel').style.opacity = 1;
 }
