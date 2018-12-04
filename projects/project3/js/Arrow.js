@@ -4,6 +4,7 @@
 
 //the object handles its x and y positions
 //handles its size and orientation its icon and tint colors
+//and knows which lane the arrow is on
 function Arrow(x,y,size,orientation,icon,hexColor,lane){
   this.x = x;
   this.y = y;
@@ -13,6 +14,7 @@ function Arrow(x,y,size,orientation,icon,hexColor,lane){
   this.hexColor = hexColor;
   this.lane = lane;
 }
+
 // its display method
 // sets the image mode to center so its x and y positions are those of the middle of the arrow
 Arrow.prototype.display = function(){
