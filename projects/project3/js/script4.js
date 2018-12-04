@@ -1,7 +1,7 @@
 // ddr simulator
 // joe kirelos
 // a ddr like game which can be played with the arrow keys
-// doesn't track score for now
+// doesn"t track score for now
 //there us an entity communicates with the player through the game to simulate the different hurdles of getting into
 //a specific or niche subculte, in this case rhythm games, in this level I want to highlight
 //entery barrier
@@ -21,8 +21,8 @@ var myFont;
 //
 //preloads the images, sounds and fonts to be used later for the the objects
 function preload(){
-  myFont = loadFont("../assets/fonts/pin.otf");
-  beep = loadSound('../assets/sounds/beep.wav');
+  myFont = loadFont("assets/fonts/pin.otf");
+  beep = loadSound("assets/sounds/beep.wav");
 }
 
 
