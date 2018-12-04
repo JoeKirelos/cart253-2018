@@ -32,7 +32,7 @@ var tTyped2="You did really bad there, didn't you ?  I guess that song is a litt
 function preload(){
   arrowIcon = loadImage('assets/images/arrow.png');
   noteIcon = loadImage('assets/images/note.png');
-  font = loadFont("../assets/fonts/press.ttf");
+  font = loadFont("../assets/fonts/bungee.ttf");
   beep = loadSound('assets/sounds/beep.wav');
   song2 = loadSound('assets/sounds/song2.wav');
 }

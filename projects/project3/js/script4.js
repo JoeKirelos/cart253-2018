@@ -21,7 +21,7 @@ var textIntial = true;
 //
 //preloads the images, sounds and fonts to be used later for the the objects
 function preload(){
-  font = loadFont("../assets/fonts/press.ttf");
+  font = loadFont("../assets/fonts/bungee.ttf");
   beep = loadSound('assets/sounds/beep.wav');
 }
 

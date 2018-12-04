@@ -32,7 +32,7 @@ var tTyped1="Hi there!  Welcome to the game!  Hope you enjoy!  If you can xD  ";
 function preload(){
   arrowIcon = loadImage('assets/images/arrow.png');
   noteIcon = loadImage('assets/images/note.png');
-  font = loadFont("../assets/fonts/press.ttf");
+  font = loadFont("../assets/fonts/bungee.ttf");
   beep = loadSound('assets/sounds/beep.wav');
   song1 = loadSound('assets/sounds/song1.wav');
 }
