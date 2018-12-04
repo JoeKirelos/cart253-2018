@@ -30,7 +30,7 @@ var tTyped3="Well that was better, wasn't it ? I mean if you couldn't FC that...
 function preload(){
   arrowIcon = loadImage('assets/images/arrow.png');
   noteIcon = loadImage('assets/images/note.png');
-  font = loadFont("../assets/fonts/bungee.ttf");
+  font = loadFont("../assets/fonts/pin.otf");
   beep = loadSound('assets/sounds/beep.wav');
   song3 = loadSound('assets/sounds/song3.wav');
 }
