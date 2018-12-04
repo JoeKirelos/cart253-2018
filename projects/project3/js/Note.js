@@ -5,16 +5,14 @@
 //handles their x and y position, their size and their orientation
 //sets a property to hold their images
 //handles the color values of their tint
-function Note(x,y,size,vy,orientation,icon,colorR,colorG,colorB,lane){
+function Note(x,y,size,vy,orientation,icon,hexColor,lane){
   this.x = x;
   this.y = y;
   this.size = size;
   this.vy = vy;
   this.orientation = orientation;
   this.icon = icon;
-  this.colorR = colorR;
-  this.colorG = colorG;
-  this.colorB = colorB;
+  this.hexColor = hexColor;
   this.lane = lane;
 }
 //its update method
@@ -32,7 +30,7 @@ Note.prototype.display = function(){
   //rotate by the orientation in the argument
   rotate(this.orientation);
   //tint the arrow by the color values in the argument and since the original arrow is white it sets its color
-  tint(this.colorR,this.colorG,this.colorB);
+  tint(this.hexColor);
   //draw the image at 0,0 which is set to this x and y since it was already translated there
   image(this.icon,0,0,this.size,this.size);
   pop();
