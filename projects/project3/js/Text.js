@@ -81,7 +81,7 @@ this.index++;
 //the display function handles the display of the tToType string on screen
 Generator.prototype.display = function(){
   fill(255);
-  textSize(42);
+  textSize(72);
   textFont(myFont);
   text(this.tToType,50, height/3,width-25);
 }
