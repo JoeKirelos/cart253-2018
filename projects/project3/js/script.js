@@ -211,6 +211,7 @@ function speedAlter(val){
 //
 //adds cues to the song, based on the speed at which the song is going, it alters the spawnRate and noteSpeed
 function cues(){
+
   song1.addCue(11.00, spawnAlter, 555);
   song1.addCue(11.00, speedAlter, 8);
   song1.addCue(24.00, spawnAlter, 600);
@@ -227,4 +228,9 @@ function cues(){
   song1.addCue(161.00, speedAlter, 6);
   song1.addCue(188.00, spawnAlter, 2000);
   song1.addCue(188.00, speedAlter, 4);
+  song1.addCue(192.00, spawnAlter, 20000);
+  song1.addCue(192.00, nextLevel);
+}
+function nextLevel(){
+ document.getElementById('nextLevel').style.opacity = 1;
 }
