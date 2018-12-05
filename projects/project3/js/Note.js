@@ -41,7 +41,7 @@ Note.prototype.display = function(){
  Note.prototype.handleScore = function(){
    // check the y position of this note and check if it overlaps with each of the arrows y positions within a 50 pixel margin
   for (var i=0; i<arrows.length; i++){
-    if (this.y < arrows[i].y+20 && this.y > arrows[i].y-20){
+    if (this.y < arrows[i].y+15 && this.y > arrows[i].y-15){
     //return true if it works
       return true;
       }
